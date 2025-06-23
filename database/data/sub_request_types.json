@@ -1,0 +1,53 @@
+
+[
+    {
+        "id": 1,
+        "request_type_id": 1,
+        "sub_request_type_name": "Hardware Repair/ Replacement/ Upgrade"
+    },
+    {
+        "id": 2,
+        "request_type_id": 1,
+        "sub_request_type_name": "Software Installation/ Upgrade"
+    },
+    {
+        "id": 3,
+        "request_type_id": 1,
+        "sub_request_type_name": "Network Connectivity Concern"
+    },
+    {
+        "id": 4,
+        "request_type_id": 1,
+        "sub_request_type_name": "Printer Concern"
+    },
+    {
+        "id": 5,
+        "request_type_id": 1,
+        "sub_request_type_name": "Data Recovery and Backup Assistance"
+    },
+    {
+        "id": 6,
+        "request_type_id": 2,
+        "sub_request_type_name": "Website Posting"
+    },
+    {
+        "id": 7,
+        "request_type_id": 2,
+        "sub_request_type_name": "Change Request"
+    },
+    {
+        "id": 8,
+        "request_type_id": 2,
+        "sub_request_type_name": "Training Request"
+    },
+    {
+        "id": 9,
+        "request_type_id": 2,
+        "sub_request_type_name": "User Account Management"
+    },
+    {
+        "id": 10,
+        "request_type_id": 1,
+        "sub_request_type_name": "Virtual Meeting Link Provision/ Scheduling"
+    }
+]

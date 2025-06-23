@@ -1,0 +1,27 @@
+
+[
+    {
+        "id": 1,
+        "rating_name": "Very dissatisfied"
+    },
+    {
+        "id": 2,
+        "rating_name": "Dissatisfied"
+    },
+    {
+        "id": 3,
+        "rating_name": "Neither satisfied nor dissatisfied"
+    },
+    {
+        "id": 4,
+        "rating_name": "Satisfied"
+    },
+    {
+        "id": 5,
+        "rating_name": "Very Satisfied"
+    },
+    {
+        "id": 6,
+        "rating_name": "Not Applicable"
+    }
+]

@@ -1,0 +1,15 @@
+
+[
+    {
+        "id": 1,
+        "client_group_name": "Citizen"
+    },
+    {
+        "id": 2,
+        "client_group_name": "Business"
+    },
+    {
+        "id": 3,
+        "client_group_name": "Government"
+    }
+]

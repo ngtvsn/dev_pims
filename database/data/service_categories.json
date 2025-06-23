@@ -1,0 +1,71 @@
+
+[
+    {
+        "id": 1,
+        "service_category_name": "Accounting and Auditing"
+    },
+    {
+        "id": 2,
+        "service_category_name": "Accreditation"
+    },
+    {
+        "id": 3,
+        "service_category_name": "Certification"
+    },
+    {
+        "id": 4,
+        "service_category_name": "Human Resource"
+    },
+    {
+        "id": 5,
+        "service_category_name": "ICT Technical Assistance"
+    },
+    {
+        "id": 6,
+        "service_category_name": "Internship"
+    },
+    {
+        "id": 7,
+        "service_category_name": "ISO and GAD"
+    },
+    {
+        "id": 8,
+        "service_category_name": "Others"
+    },
+    {
+        "id": 9,
+        "service_category_name": "Procedure for complaints/recommendations/inquiries/suggestions"
+    },
+    {
+        "id": 10,
+        "service_category_name": "Processing of Payment"
+    },
+    {
+        "id": 11,
+        "service_category_name": "Procurement"
+    },
+    {
+        "id": 12,
+        "service_category_name": "Request for Bioassay Services"
+    },
+    {
+        "id": 13,
+        "service_category_name": "Request for Funding"
+    },
+    {
+        "id": 14,
+        "service_category_name": "Request for Information"
+    },
+    {
+        "id": 15,
+        "service_category_name": "Sales and Marketing"
+    },
+    {
+        "id": 16,
+        "service_category_name": "Technical Assistance"
+    },
+    {
+        "id": 17,
+        "service_category_name": "Training and Seminars"
+    }
+]

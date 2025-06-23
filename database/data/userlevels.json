@@ -1,0 +1,11 @@
+
+[
+    {
+        "id": 1,
+        "userlevel_name": "Administrator"
+    },
+    {
+        "id": 2,
+        "userlevel_name": "Employee"
+    }
+]

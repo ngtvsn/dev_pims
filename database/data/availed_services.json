@@ -1,0 +1,335 @@
+
+[
+    {
+        "id": 1,
+        "status_type_id": "2",
+        "service_type_id": "2",
+        "service_category_id": "9",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Procedure for complaints/recommendations/inquiries/suggestions",
+        "availed_service_name_short": "Complaints/recommendations/inquiries/suggestions"
+    },
+    {
+        "id": 2,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "13",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for Funding of T&CM Research/es",
+        "availed_service_name_short": "Funding of T&CM Research/es"
+    },
+    {
+        "id": 3,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "14",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for Information Regarding T&CM Research/es",
+        "availed_service_name_short": "Information Regarding T&CM Research/es"
+    },
+    {
+        "id": 4,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "3",
+        "cost_field_status_id": "1",
+        "availed_service_name": "Initial Application for Certification (Filipino/Non-Filipino)",
+        "availed_service_name_short": "Initial Application for Certification"
+    },
+    {
+        "id": 5,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "3",
+        "cost_field_status_id": "1",
+        "availed_service_name": "Renewal of Application for Certification (Filipino/Non-Filipino)",
+        "availed_service_name_short": "Renewal of Application for Certification"
+    },
+    {
+        "id": 6,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "2",
+        "cost_field_status_id": "1",
+        "availed_service_name": "Initial Application for Accreditation (Clinics, Training Centers & TAHC Organization)",
+        "availed_service_name_short": "Initial Application for Accreditation"
+    },
+    {
+        "id": 7,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "2",
+        "cost_field_status_id": "1",
+        "availed_service_name": "Renewal of Application for Accreditation (Clinics, Training Centers & TAHC Organization)",
+        "availed_service_name_short": "Renewal of Application for Accreditation"
+    },
+    {
+        "id": 8,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "17",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for Training on Acupressure, Tuina Massage, Basic & Advance Acupuncture",
+        "availed_service_name_short": "Request for Training on Acupressure, Tuina Massage, Basic & Advance Acupuncture"
+    },
+    {
+        "id": 9,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "17",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for Training on Acupressure, Tuina Massage, Basic & Advance Acupuncture (PITAHC Initiated Seminars and Training)",
+        "availed_service_name_short": "Request for Training on Acupressure, Tuina Massage, Basic & Advance Acupuncture (PITAHC)"
+    },
+    {
+        "id": 10,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "17",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for Seminar Orientation on the proper use of medicinal plants using the book “Patnubay sa paggamit ng Halamang Gamot”; seminar orientation on Traditional and Complementary Medicines Practices; Tuina Massage, Basic & Advance Acupuncture",
+        "availed_service_name_short": "Request for Seminar Orientation on the use of medicinal plants; orientation on T&CM Practices; Tuina Massage, Basic & Advance Acupuncture"
+    },
+    {
+        "id": 11,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "17",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for Seminar Orientation on the proper use of medicinal plants using the book “Patnubay sa paggamit ng Halamang Gamot”; seminar orientation on Traditional and Complementary Medicines Practices; Tuina Massage, Basic & Advance Acupuncture (PITAHC Initiated Seminars and Training)",
+        "availed_service_name_short": "Request for Seminar Orientation on the use of medicinal plants; orientation on T&CM Practices; Tuina Massage, Basic & Advance Acupuncture (PITAHC)"
+    },
+    {
+        "id": 12,
+        "status_type_id": "2",
+        "service_type_id": "2",
+        "service_category_id": "15",
+        "cost_field_status_id": "1",
+        "availed_service_name": "Sales and Marketing of PITAHC Published Books and herbal products (soaps, lagundi, sambong)",
+        "availed_service_name_short": "Sales and Marketing of PITAHC Published Books and herbal products"
+    },
+    {
+        "id": 13,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "7",
+        "cost_field_status_id": "2",
+        "availed_service_name": "ISO & GAD related matters",
+        "availed_service_name_short": "ISO & GAD related matters"
+    },
+    {
+        "id": 14,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "51",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Accounting, Auditing, and other concerns from clients",
+        "availed_service_name_short": "Accounting, Auditing, and other concerns"
+    },
+    {
+        "id": 15,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "5",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for ICT service/ technical assistance",
+        "availed_service_name_short": "Request for ICT technical assistance"
+    },
+    {
+        "id": 16,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "4",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Hiring of New Employee",
+        "availed_service_name_short": "Hiring of New Employee"
+    },
+    {
+        "id": 17,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "11",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Procurement of Infrastructures, Goods and services",
+        "availed_service_name_short": "Procurement of Infrastructures"
+    },
+    {
+        "id": 18,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "11",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Procurement of Consulting Services",
+        "availed_service_name_short": "Procurement of Consulting Services"
+    },
+    {
+        "id": 19,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "10",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Processing of Payment for Purchase of Goods/Services under Shopping",
+        "availed_service_name_short": "Payment for Purchase of Goods/Services under Shopping"
+    },
+    {
+        "id": 20,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "10",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Processing of Payment for Cash Advance to Employees for Local Travel",
+        "availed_service_name_short": "Payment for Cash Advance to Employees for Local Travel"
+    },
+    {
+        "id": 21,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "10",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Processing of Payment for Cash Advances to Employees for Foreign Travel",
+        "availed_service_name_short": "Payment for Cash Advances to Employees for Foreign Travel"
+    },
+    {
+        "id": 22,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "10",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Processing of Payment for Research Project",
+        "availed_service_name_short": "Payment for Research Project"
+    },
+    {
+        "id": 23,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "10",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Processing of Payment for Honorarium",
+        "availed_service_name_short": "Payment for Honorarium"
+    },
+    {
+        "id": 24,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "12",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for Bioassay Services (Animal handling, drug administration, specimen extraction)",
+        "availed_service_name_short": "Request for Bioassay Services (Animal handling, drug administration, specimen extraction)"
+    },
+    {
+        "id": 25,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "6",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Pharmacy Intership",
+        "availed_service_name_short": "Pharmacy Intership"
+    },
+    {
+        "id": 26,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "16",
+        "availed_service_name": "Technical Assistance",
+        "availed_service_name_short": "Technical Assistance"
+    },
+    {
+        "id": 27,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "10",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Payment for Service Provider",
+        "availed_service_name_short": "Payment for Service Provider"
+    },
+    {
+        "id": 28,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "15",
+        "cost_field_status_id": "1",
+        "availed_service_name": "Sales and Marketing of PITAHC Products (Herbal Soap, Lagundi, Sambong  and/or IEC materials) (Walk-in)",
+        "availed_service_name_short": "Sales and Marketing of PITAHC Products (Walk-in)"
+    },
+    {
+        "id": 29,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "12",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for Bioassay Services (Consultation for research protocol, research design)",
+        "availed_service_name_short": "Request for Bioassay Services (Consultation for research protocol, research design)"
+    },
+    {
+        "id": 30,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "12",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for Bioassay Services (Conduct of Bioassay tests)",
+        "availed_service_name_short": "Request for Bioassay Services (Conduct of Bioassay tests)"
+    },
+    {
+        "id": 31,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "15",
+        "cost_field_status_id": "1",
+        "availed_service_name": "Sales and Marketing of PITAHC Products (Herbal Soap, Lagundi, Sambong  and/or IEC materials) (Bulk Order)",
+        "availed_service_name_short": "Sales and Marketing of PITAHC Products (Bulk Order)"
+    },
+    {
+        "id": 32,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "14",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for Information through eFOI Portal / FIO Standard Form",
+        "availed_service_name_short": "Request for Information through eFOI Portal / FIO Standard Form"
+    },
+    {
+        "id": 33,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "8",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Others, please note below",
+        "availed_service_name_short": "Others"
+    },
+    {
+        "id": 34,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "17",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Community-based Orientation on the proper use of medicinal plants using the book",
+        "availed_service_name_short": "Community-based Orientation (medicinal plants using the book)"
+    },
+    {
+        "id": 35,
+        "status_type_id": "1",
+        "service_type_id": "1",
+        "service_category_id": "4",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Request for HR related matters",
+        "availed_service_name_short": "HR related matters"
+    },
+    {
+        "id": 36,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "9",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Simple - Procedure for complaints/recommendations/inquiries/suggestions",
+        "availed_service_name_short": "Simple complaints/recommendations/inquiries/suggestions"
+    },
+    {
+        "id": 37,
+        "status_type_id": "1",
+        "service_type_id": "2",
+        "service_category_id": "9",
+        "cost_field_status_id": "2",
+        "availed_service_name": "Complex - Procedure for complaints/recommendations/inquiries/suggestions",
+        "availed_service_name_short": "Complex - complaints/recommendations/inquiries/suggestions"
+    }
+]

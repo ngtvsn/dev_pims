@@ -1,0 +1,198 @@
+
+[
+    {
+        "id": 1,
+        "salary_grade_id": 18,
+        "position_name": "Accountant III"
+    },
+    {
+        "id": 2,
+        "salary_grade_id": 6,
+        "position_name": "Administrative Aide VI"
+    },
+    {
+        "id": 3,
+        "salary_grade_id": 9,
+        "position_name": "Administrative Assistant III"
+    },
+    {
+        "id": 4,
+        "salary_grade_id": 11,
+        "position_name": "Administrative Assistant V"
+    },
+    {
+        "id": 5,
+        "salary_grade_id": 15,
+        "position_name": "Administrative Officer IV"
+    },
+    {
+        "id": 6,
+        "salary_grade_id": 25,
+        "position_name": "Attorney V"
+    },
+    {
+        "id": 7,
+        "salary_grade_id": 14,
+        "position_name": "Audio-Visual Aids Technician IV"
+    },
+    {
+        "id": 8,
+        "salary_grade_id": 22,
+        "position_name": "Board Secretary IV"
+    },
+    {
+        "id": 9,
+        "salary_grade_id": 18,
+        "position_name": "Budget Officer III"
+    },
+    {
+        "id": 10,
+        "salary_grade_id": 18,
+        "position_name": "Cashier III"
+    },
+    {
+        "id": 11,
+        "salary_grade_id": 24,
+        "position_name": "Chief Administrative Officer"
+    },
+    {
+        "id": 12,
+        "salary_grade_id": 24,
+        "position_name": "Chief Financial Management Specialist"
+    },
+    {
+        "id": 13,
+        "salary_grade_id": 18,
+        "position_name": "Computer Programmer III"
+    },
+    {
+        "id": 14,
+        "salary_grade_id": 18,
+        "position_name": "Development Management Officer III"
+    },
+    {
+        "id": 15,
+        "salary_grade_id": 22,
+        "position_name": "Development Management Officer IV"
+    },
+    {
+        "id": 16,
+        "salary_grade_id": 28,
+        "position_name": "Director General"
+    },
+    {
+        "id": 17,
+        "salary_grade_id": 24,
+        "position_name": "Division Chief IV"
+    },
+    {
+        "id": 18,
+        "salary_grade_id": 14,
+        "position_name": "Executive Assistant I"
+    },
+    {
+        "id": 19,
+        "salary_grade_id": 18,
+        "position_name": "Health Education and Promotion Officer III"
+    },
+    {
+        "id": 20,
+        "salary_grade_id": 22,
+        "position_name": "Health Education and Promotion Officer IV"
+    },
+    {
+        "id": 21,
+        "salary_grade_id": 24,
+        "position_name": "Health Education and Promotion Officer V"
+    },
+    {
+        "id": 22,
+        "salary_grade_id": 18,
+        "position_name": "Human Resource Management Officer III"
+    },
+    {
+        "id": 23,
+        "salary_grade_id": 16,
+        "position_name": "Information Systems Analyst II"
+    },
+    {
+        "id": 24,
+        "salary_grade_id": 15,
+        "position_name": "Licensing Officer II"
+    },
+    {
+        "id": 25,
+        "salary_grade_id": 22,
+        "position_name": "Market Specialist IV"
+    },
+    {
+        "id": 26,
+        "salary_grade_id": 20,
+        "position_name": "Pharmacist V"
+    },
+    {
+        "id": 27,
+        "salary_grade_id": 24,
+        "position_name": "Pharmacist VII"
+    },
+    {
+        "id": 28,
+        "salary_grade_id": 22,
+        "position_name": "Planning Officer IV"
+    },
+    {
+        "id": 29,
+        "salary_grade_id": 24,
+        "position_name": "Planning Officer V"
+    },
+    {
+        "id": 30,
+        "salary_grade_id": 14,
+        "position_name": "Records Officer II"
+    },
+    {
+        "id": 31,
+        "salary_grade_id": 13,
+        "position_name": "Science Research Specialist I"
+    },
+    {
+        "id": 32,
+        "salary_grade_id": 16,
+        "position_name": "Science Research Specialist II"
+    },
+    {
+        "id": 33,
+        "salary_grade_id": 18,
+        "position_name": "Special Operations Officer III"
+    },
+    {
+        "id": 34,
+        "salary_grade_id": 22,
+        "position_name": "Supervising Science Research Specialist"
+    },
+    {
+        "id": 35,
+        "salary_grade_id": 14,
+        "position_name": "Supply Officer II"
+    },
+    {
+        "id": 36,
+        "salary_grade_id": 15,
+        "position_name": "Training Specialist II"
+    },
+    {
+        "id": 37,
+        "salary_grade_id": 19,
+        "position_name": "Engineer III"
+    },
+    {
+        "id": 38,
+        "salary_grade_id": 15,
+        "position_name": "Financial Analyst II"
+    },
+    {
+        "id": 39,
+        "salary_grade_id": 19,
+        "position_name": "Senior Science Research Specialist"
+    }
+]

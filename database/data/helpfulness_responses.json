@@ -1,0 +1,19 @@
+
+[
+    {
+        "id": 1,
+        "helpfulness_response_name": "Helped very much"
+    },
+    {
+        "id": 2,
+        "helpfulness_response_name": "Somewhat helped"
+    },
+    {
+        "id": 3,
+        "helpfulness_response_name": "Did not help"
+    },
+    {
+        "id": 4,
+        "helpfulness_response_name": "Not applicable"
+    }
+]

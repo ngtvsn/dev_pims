@@ -1,0 +1,23 @@
+
+[
+    {
+        "id": 1,
+        "visibility_response_name": "Easy to see"
+    },
+    {
+        "id": 2,
+        "visibility_response_name": "Somewhat easy to see"
+    },
+    {
+        "id": 3,
+        "visibility_response_name": "Difficult to see"
+    },
+    {
+        "id": 4,
+        "visibility_response_name": "Not visible at all"
+    },
+    {
+        "id": 5,
+        "visibility_response_name": "Not applicable"
+    }
+]

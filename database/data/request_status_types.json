@@ -1,0 +1,23 @@
+
+[
+    {
+        "id": 1,
+        "request_status_type_name": "Pending"
+    },
+    {
+        "id": 2,
+        "request_status_type_name": "In Progress"
+    },
+    {
+        "id": 3,
+        "request_status_type_name": "Resolved"
+    },
+    {
+        "id": 4,
+        "request_status_type_name": "Closed"
+    },
+    {
+        "id": 5,
+        "request_status_type_name": "Cancelled"
+    }
+]

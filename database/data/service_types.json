@@ -1,0 +1,11 @@
+
+[
+    {
+        "id": 1,
+        "service_type_name": "Internal"
+    },
+    {
+        "id": 2,
+        "service_type_name": "External"
+    }
+]
