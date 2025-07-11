@@ -23,7 +23,9 @@
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
         "tailwindcss": "^2.2.7",
-        "tailwindcss-plugins": "^0.3.0"
+        "tailwindcss-plugins": "^0.3.0",
+        "datatables.net-bs4": "^1.10.25",
+        "toastr": "^2.1.4"
     },
     "dependencies": {
         "html2pdf.js": "^0.10.1",

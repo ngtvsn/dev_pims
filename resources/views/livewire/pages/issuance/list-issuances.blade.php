@@ -64,13 +64,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="fas fa-folder mr-2"></i>[ INSERT CARD TITLE ]</h3>
-                            </div>
-                            <div class="card-body">
-                            </div>
-                        </div>
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="card-title"><i class="fas fa-folder mr-2"></i>Issuances</h3>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">
+            <i class="fas fa-plus mr-2"></i>Upload Issuance
+        </button>
+    </div>
+    <div class="card-body">
+        @include('livewire.pages.issuance.upload-modal')
+    </div>
+</div>
                     </div>
                 </div>
             </div>

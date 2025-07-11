@@ -41,22 +41,22 @@
   <div class="wrapper">
   @if( Auth::user() )
       <!-- Main Header -->
-      @include('layouts.navbar')
+      @include('layouts.b_navbar')
 
       <!-- Left side column. contains the logo and sidebar -->
-      @include('layouts.sidebar')
+      @include('layouts.b_sidebar')
 
       <!-- Content Wrapper. Contains page content -->
 
       <div class="content-wrapper">
-      {{ $slot }}
+      @yield('content')
       </div>
 
       <!-- Main Footer -->
-      @include('layouts.footer')
+      @include('layouts.b_footer')
   @else
     <div>
-        {{ $slot }}
+        @yield('content')
     </div>
   @endif
   </div>
