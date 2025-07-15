@@ -8,6 +8,8 @@ The current task is to begin the process of upgrading the application's dependen
 
 ## Recent Accomplishments
 
+*   **Modernized Registration Page:** Successfully redesigned the registration page with a modern, card-based layout, consistent with the login page.
+*   **Modernized Login Page:** Successfully redesigned the login page with a modern, card-based layout, and a dedicated stylesheet for improved maintainability.
 *   **Modernized Module Selector:** Successfully redesigned the `module-selector` page with a new card-based layout, hover effects, and updated icons. The styles were consolidated into the component's Blade file for improved maintainability.
 
 ## Key Activities

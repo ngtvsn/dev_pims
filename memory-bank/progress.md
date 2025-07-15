@@ -8,11 +8,15 @@ The project has moved past the initial setup and UI modernization phase. The cur
 
 ## Completed Tasks
 
+*   **Modernized Registration Page:** The registration page has been updated with a modern, card-based design, consistent with the login page.
+*   **Modernized Login Page:** The login page has been updated with a modern, card-based design and a dedicated stylesheet.
 *   **Modernized `module-selector` page:** The module selection interface has been updated with a modern, card-based design and improved interactivity.
 
 ## What Works
 
 *   The application is fully functional on Laravel 8.
+*   The registration page has been successfully modernized.
+*   The login page has been successfully modernized.
 *   The `module-selector` page has been successfully modernized.
 
 ## What's Left to Build

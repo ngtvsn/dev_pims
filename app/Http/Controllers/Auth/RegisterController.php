@@ -81,7 +81,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'userlevel_id' => 2,
-            'status_type_id' => 1,
         ]);
     }
 }
