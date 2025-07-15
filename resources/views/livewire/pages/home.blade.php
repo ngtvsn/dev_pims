@@ -1,117 +1,179 @@
 <div>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js"></script>
     <style>
-        .form-rounded {
-            border-radius: 2rem;
+        body {
+            background-color: #f0f2f5;
         }
-    </style>  
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+        }
+        .form-control-plaintext {
+            cursor: pointer;
+            border-radius: 2rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #f0f2f5;
+            transition: background-color 0.2s ease;
+        }
+        .form-control-plaintext:hover {
+            background-color: #e4e6e9;
+        }
+        .post-card, .comment-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .post-actions .btn {
+            font-weight: 600;
+            color: #65676b;
+        }
+        .post-actions .btn:hover {
+            background-color: #f0f2f5;
+        }
+        .comment-input {
+            background-color: #f0f2f5;
+            border-radius: 2rem;
+            border: none;
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .initials-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
 
-    <div class="content" wire:poll.5s>
-        <div class="container">
-            <div class="row justify-content-md-center pt-3">
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <span class="ml-1 font-weight-bold">{{ Auth::user()->last_name.', '.Auth::user()->first_name }}</span>
-                            <span class="font-italic ml-1">({{ Auth::user()->email }})</span>
-                            <input class="form-control form-rounded mt-2" id="enabledInput" type="text" placeholder="What's on your mind, {{ Auth::user()->last_name.', '.Auth::user()->first_name }}?" disabled onclick="enableInput()">
-                                <hr>
-                            <!-- Instead of direct input, trigger modal -->
-                            <button type="button" class="btn btn-light btn-block mt-2" 
-                                    wire:click="$emit('showPostModal')">
-                                <i class="fas fa-paper-plane mr-2"></i> Create post
-                            </button>
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <!-- Create Post Section -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="initials-circle mr-3" style="background-color: hsl({{ crc32(Auth::id()) % 360 }}, 50%, 50%);">
+                            {{ strtoupper(substr(Auth::user()->first_name, 0, 1) . substr(Auth::user()->last_name, 0, 1)) }}
+                        </div>
+                        <div class="flex-grow-1" wire:click="$emit('showPostModal')">
+                            <input type="text" class="form-control-plaintext" placeholder="What's on your mind, {{ Auth::user()->first_name }}?">
                         </div>
                     </div>
+                </div>
 
-                    <!-- Display Posts -->
-                    @foreach($posts as $post)
-                        <div class="card mt-3">
-                            <div class="card-body">
-                                <span class="ml-1 font-weight-bold">{{ $post->user_created->division->division_name }}</span>
-                                <hr>
-                                <span class="ml-1 font-weight-bold">{{ $post->user_created->last_name.', '.$post->user_created->first_name }}</span>
-                                <span class="font-italic ml-1">({{ $post->user_created->email }})</span>
-                                <small class="ml-1 float-right">{{ $post->created_at->diffForHumans() }}</small>
-                                <br>
-                                <h6 class="my-4 ml-1">{{ $post->title }}</h6>
-                                <div class="my-2 ml-1" style="white-space: pre-wrap; word-wrap: break-word; font-family: inherit;">{{ $post->content }}</div>
-
-                                <div class="row">
-                                    <div class="col-6" style="display: flex; align-items: center;">
-                                            @if($post->isLikedByUser())
-                                            <button class="btn btn-success btn-sm rounded-circle">
-                                                <i class="fas fa-thumbs-up"></i>
-                                            </button>
-                                            @else
-                                            <button class="btn btn-secondary btn-sm rounded-circle">
-                                                <i class="far fa-thumbs-up"></i>
-                                            </button>
-                                            @endif
-                                        
-                                        <a href="#" class="ml-2 text-secondary">{{ $post->likes->count() }}</a>
-                                    </div>
-                                    <div class="col-6" style="align-items: center;">
-                                        <a href="#" class="text-secondary float-right">{{ $post->comments->count() }} comments</a>
-                                    </div>
+                <!-- Display Posts -->
+                @forelse($posts as $post)
+                    <div class="card post-card mb-4">
+                        <div class="card-body">
+                            <!-- Post Header -->
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="initials-circle mr-3" style="background-color: hsl({{ crc32($post->user_created->id) % 360 }}, 50%, 50%);">
+                                    {{ strtoupper(substr($post->user_created->first_name, 0, 1) . substr($post->user_created->last_name, 0, 1)) }}
                                 </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-6">
-
-                                        @if($post->isLikedByUser())
-                                                <button type="button" class="btn btn-light text-success btn-block" wire:click="likePost({{ $post->id }})"><i class="fas fa-thumbs-up text-success mr-2"></i>Like</button>
-                                            @else
-                                                <button type="button" class="btn btn-light btn-block" wire:click="likePost({{ $post->id }})"><i class="far fa-thumbs-up mr-2"></i>Like</button>
-                                            @endif
-                                        
-                                    </div>
-                                    <div class="col-6">
-                                        <button type="button" class="btn btn-light btn-block"><i class="far fa-comment mr-2"></i>Comment</button>
-                                    </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 fw-bold">{{ $post->user_created->first_name }} {{ $post->user_created->last_name }}</h6>
+                                    <small class="text-muted">{{ $post->created_at->diffForHumans() }} · {{ $post->user_created->division->division_name }}</small>
                                 </div>
-                                
-                                <hr>
+                            </div>
 
-                                <!-- Display Comments -->
-                                @foreach($post->comments as $comment)
-                                    <div class="card rounded-9 mt-2">
-                                        <div class="card-body rounded-9" style="background-color:#f0f2f5;">
-                                            <span class="font-weight-bold">{{ $comment->user_created->last_name.', '.$comment->user_created->first_name }}</span>
-                                            <span class="font-italic ml-1">({{ $comment->user_created->email }})</span>
-                                            <small class="float-right">{{ $comment->created_at->diffForHumans() }}</small>
-                                            <br>
-                                            <span>{{ $comment->content }}</span>
-                                            <div class="mt-2">
-                                                @if($comment->isLikedByUser())
-                                                    <a href="#" class="text-success font-weight-bold" wire:click="likeComment({{ $comment->id }})">Like</a>
-                                                    <span class="text-secondary ml-2">{{ $comment->likes->count() }}</span>
-                                                    <i class="fas fa-thumbs-up fa-xs text-success"></i>
-                                                @else
-                                                    <a href="#" class="text-secondary" wire:click="likeComment({{ $comment->id }})">Like</a>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                            <!-- Post Content -->
+                            <h5 class="mb-3">{{ $post->title }}</h5>
+                            <p style="white-space: pre-wrap; word-wrap: break-word;">{{ $post->content }}</p>
+
+                            <!-- Post Stats -->
+                            <div class="d-flex justify-content-between text-muted mb-2">
                                 <div>
-                                    <div class="row" style="align-items: center;">
-                                        <div class="col-11">
-                                        <input class="form-control form-rounded" id="enabledInput" type="text" placeholder="Comment as {{ Auth::user()->last_name.', '.Auth::user()->first_name }}?" wire:model.defer="newComment.{{ $post->id }}">
+                                    @if($post->likes->count() > 0)
+                                        <i class="fas fa-thumbs-up text-primary"></i>
+                                        {{ $post->likes->count() }}
+                                    @endif
+                                </div>
+                                <div>
+                                    {{ $post->comments->count() }} comments
+                                </div>
+                            </div>
+                            <hr class="my-1">
+
+                            <!-- Post Actions -->
+                            <div class="d-flex justify-content-around post-actions">
+                                <button type="button" class="btn btn-link text-decoration-none w-100 {{ $post->isLikedByUser() ? 'text-primary' : 'text-muted' }}" wire:click="likePost({{ $post->id }})">
+                                    <i class="far fa-thumbs-up me-2"></i> Like
+                                </button>
+                                <button type="button" class="btn btn-link text-decoration-none text-muted w-100">
+                                    <i class="far fa-comment me-2"></i> Comment
+                                </button>
+                            </div>
+                            <hr class="my-1">
+
+                            <!-- Comments Section -->
+                            @foreach($post->comments as $comment)
+                                <div class="d-flex mt-3">
+                                    <div class="initials-circle mr-3" style="background-color: hsl({{ crc32($comment->user_created->id) % 360 }}, 40%, 60%); width:32px; height:32px; font-size: 0.8rem;">
+                                        {{ strtoupper(substr($comment->user_created->first_name, 0, 1) . substr($comment->user_created->last_name, 0, 1)) }}
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <div class="bg-light p-2 rounded">
+                                            <div class="d-flex justify-content-between">
+                                                <span class="fw-bold">{{ $comment->user_created->first_name }} {{ $comment->user_created->last_name }}</span>
+                                                <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
+                                            </div>
+                                            <p class="mb-1">{{ $comment->content }}</p>
                                         </div>
-                                        <div class="col-1">
-                                            <button type="button" class="btn btn-link btn-block" wire:click="addComment({{ $post->id }})"><i class="fas fa-paper-plane text-success"></i></button>
+                                        <div class="small ps-2">
+                                            <a href="#" class="text-muted text-decoration-none {{ $comment->isLikedByUser() ? 'text-primary fw-bold' : '' }}" wire:click.prevent="likeComment({{ $comment->id }})">Like</a>
+                                            @if($comment->likes->count() > 0)
+                                                <span class="text-muted ms-1">· {{ $comment->likes->count() }}</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
+                            @endforeach
+
+                            <!-- Add Comment -->
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="initials-circle mr-3" style="background-color: hsl({{ crc32(Auth::id()) % 360 }}, 40%, 60%); width:32px; height:32px; font-size: 0.8rem;">
+                                    {{ strtoupper(substr(Auth::user()->first_name, 0, 1) . substr(Auth::user()->last_name, 0, 1)) }}
+                                </div>
+                                <div class="input-group ms-3">
+                                    <input type="text" class="form-control comment-input" placeholder="Write a comment..." wire:model.defer="newComment.{{ $post->id }}" wire:keydown.enter="addComment({{ $post->id }})">
+                                    <button class="btn btn-link" wire:click="addComment({{ $post->id }})"><i class="fas fa-paper-plane"></i></button>
+                                </div>
                             </div>
                         </div>
-                    @endforeach
-                    <div class="mt-3">
-                        {{ $posts->links() }}
                     </div>
+                @empty
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <p class="mb-0">No announcements yet. Be the first to post!</p>
+                        </div>
+                    </div>
+                @endforelse
+
+                @if(count($posts) < $totalPosts)
+                    <div x-data="{
+                        observe () {
+                            let observer = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        @this.call('loadMore')
+                                    }
+                                })
+                            }, {
+                                root: null
+                            })
+                            observer.observe(this.$el)
+                        }
+                    }" x-init="observe"></div>
+                @endif
+
+                <div wire:loading wire:target="loadMore" class="text-center">
+                    Loading more posts...
                 </div>
             </div>
         </div>
@@ -119,28 +181,46 @@
 
     <!-- Modal for Creating Post -->
     <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="postModalLabel">Create a Post</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="postModalLabel">Create Announcement</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-2">
-                        <span class="ml-1 font-weight-bold">{{ Auth::user()->last_name.', '.Auth::user()->first_name }}</span>
-                        <span class="font-italic ml-1">({{ Auth::user()->email }})</span>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="initials-circle mr-3" style="background-color: hsl({{ crc32(Auth::id()) % 360 }}, 50%, 50%);">
+                            {{ strtoupper(substr(Auth::user()->first_name, 0, 1) . substr(Auth::user()->last_name, 0, 1)) }}
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h6>
+                            <small class="text-muted">Posting publicly</small>
+                        </div>
                     </div>
-                    
-                    <input type="text" class="form-control mb-2" placeholder="Title" wire:model.defer="postTitle">
-                    <textarea class="form-control" placeholder="What's on your mind?" wire:model.defer="postContent"></textarea>
+                    <input type="text" class="form-control mb-3" placeholder="Title" wire:model.defer="postTitle">
+                    <textarea class="form-control" rows="5" placeholder="What's on your mind, {{ Auth::user()->first_name }}?" wire:model.defer="postContent" disable></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success w-100 d-flex align-items-center justify-content-center" wire:click="createPost" wire:loading.attr="disabled">
-                        <i class="fas fa-paper-plane mr-2"></i>Post</button>
+                    <button type="button" class="btn btn-primary w-100" wire:click="createPost" wire:loading.attr="disabled">
+                        Post
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+
+    @push('scripts')
+    <script>
+        document.addEventListener('livewire:load', function () {
+            var postModal = new bootstrap.Modal(document.getElementById('postModal'));
+
+            Livewire.on('showPostModal', () => {
+                postModal.show();
+            });
+
+            Livewire.on('postCreated', () => {
+                postModal.hide();
+            });
+        });
+    </script>
+    @endpush
 </div>

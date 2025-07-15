@@ -4,6 +4,7 @@
     <div class="form-container">
         <div class="form-card" wire:ignore.self>
             <div class="card-header">
+                <h5 class="form-title mb-0">Philippine Institute of Traditional and Alternative Health Care</h5>
                 <h3 class="form-title mb-0">Customer Satisfaction Measurement Form</h3>
             </div>
             <div class="card-body">

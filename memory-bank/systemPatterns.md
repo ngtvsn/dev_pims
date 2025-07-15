@@ -14,5 +14,5 @@ The application follows a standard Laravel monolithic architecture. The frontend
 
 ## Component Relationships
 
-*   **`AdminLTE` Theme:** The overall look and feel of the application is provided by the `infyomlabs/laravel-ui-adminlte` package, which integrates the AdminLTE template with Laravel.
+*   **`AdminLTE` Theme:** The overall look and feel of the application was originally provided by the `infyomlabs/laravel-ui-adminlte` package. However, a new modernized theme using Bootstrap 5 and custom CSS is being implemented, starting with the authentication pages.
 *   **Livewire and Blade:** Livewire components are rendered within Blade templates, allowing for a seamless integration of dynamic and static content.

@@ -8,14 +8,18 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\PostLike;
 use App\Models\CommentLike;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class Home extends Component
 {
     use WithPagination;
+
     public $postTitle;
     public $postContent;
     public $newComment = [];
+    public $perPage = 10;
+    public $totalPosts;
 
     protected $listeners = ['showPostModal'];
 
@@ -65,14 +69,28 @@ class Home extends Component
             'postContent' => 'required',
         ]);
 
-        Post::create([
+        $post = Post::create([
             'created_by' => Auth::id(),
             'title' => $this->postTitle,
             'content' => $this->postContent,
         ]);
 
+        // Notify all users except the author
+        $users = \App\Models\User::where('id', '!=', Auth::id())->get();
+        foreach ($users as $user) {
+            Notification::create([
+                'user_id' => $user->id,
+                'type' => 'new_post',
+                'data' => [
+                    'post_id' => $post->id,
+                    'post_title' => $post->title,
+                    'author_name' => Auth::user()->first_name . ' ' . Auth::user()->last_name,
+                ],
+            ]);
+        }
+
         $this->reset(['postTitle', 'postContent']);
-        $this->dispatchBrowserEvent('closePostModal');
+        $this->emit('postCreated');
     }
 
     public function addComment($postId)
@@ -81,11 +99,24 @@ class Home extends Component
             "newComment.$postId" => 'required|string|max:500',
         ]);
 
-        Comment::create([
+        $comment = Comment::create([
             'post_id' => $postId,
             'created_by' => Auth::id(),
             'content' => $this->newComment[$postId],
         ]);
+
+        $post = Post::find($postId);
+        if ($post->created_by !== Auth::id()) {
+            Notification::create([
+                'user_id' => $post->created_by,
+                'type' => 'new_comment',
+                'data' => [
+                    'post_id' => $post->id,
+                    'post_title' => $post->title,
+                    'commenter_name' => Auth::user()->first_name . ' ' . Auth::user()->last_name,
+                ],
+            ]);
+        }
 
         Post::where('id', $postId)->update(['updated_at' => now()]);
 
@@ -95,11 +126,17 @@ class Home extends Component
         // Refresh post data
         $this->emit('commentAdded');
     }
+
+    public function loadMore()
+    {
+        $this->perPage += 10;
+    }
     
     public function render()
     {
+        $this->totalPosts = Post::count();
         return view('livewire.pages.home', [
-            'posts' => Post::with(['user_created', 'likes', 'comments.likes'])->orderBy('updated_at', 'desc')->paginate(10),
+            'posts' => Post::with(['user_created', 'likes', 'comments.likes'])->orderBy('updated_at', 'desc')->paginate($this->perPage),
         ]);
     }
 }

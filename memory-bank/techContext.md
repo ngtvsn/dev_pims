@@ -1,30 +1,31 @@
 # PIMS Technology Context
 
-This document outlines the technology stack and key dependencies of the Personnel Information Management System (PIMS) as of the beginning of the Laravel 9 upgrade project.
+This document outlines the technology stack and key dependencies of the Personnel Information Management System (PIMS) after the initial dependency upgrade for Laravel 9.
 
 ## Core Technologies
 
-*   **PHP:** ^7.3|^8.0
-*   **Laravel Framework:** ^8.12
-*   **Livewire:** ^2.3
+*   **PHP:** ^8.0
+*   **Laravel Framework:** ^9.0
+*   **Livewire:** ^2.10
+*   **Bootstrap 5:** Used for the modernized user interface.
+*   **Custom CSS:** A custom stylesheet (`public/css/login.css`) is used for the modernized authentication pages.
 
 ## Key Dependencies
 
-*   **`fideloper/proxy`:** ^4.4 (To be removed during upgrade)
 *   **`guzzlehttp/guzzle`:** ^7.0.1
-*   **`infyomlabs/laravel-ui-adminlte`:** ^3.1
+*   **`infyomlabs/laravel-ui-adminlte`:** ^4.0
 *   **`kwn/number-to-words`:** ^2.9
-*   **`laravel/tinker`:** ^2.5
+*   **`laravel/tinker`:** ^2.7
 *   **`maatwebsite/excel`:** ^3.1
 *   **`nesbot/carbon`:** ^2.45
-*   **`owen-it/laravel-auditing`:** ^12.0
-*   **`rappasoft/laravel-livewire-tables`:** ^1.6 (High-risk dependency requiring significant refactoring)
+*   **`owen-it/laravel-auditing`:** ^13.0
+*   **`rappasoft/laravel-livewire-tables`:** ^2.0 (High-risk dependency requiring significant refactoring)
 
 ## Development Dependencies
 
-*   **`facade/ignition`:** ^2.5 (To be replaced with `spatie/laravel-ignition`)
+*   **`spatie/laravel-ignition`:** ^1.0
 *   **`fakerphp/faker`:** ^1.9.1
 *   **`laravel/sail`:** ^1.0.1
 *   **`mockery/mockery`:** ^1.4.2
-*   **`nunomaduro/collision`:** ^5.0 (To be updated)
-*   **`phpunit/phpunit`:** ^9.3.3
+*   **`nunomaduro/collision`:** ^6.1
+*   **`phpunit/phpunit`:** ^9.5

@@ -32,6 +32,35 @@
     @yield('third_party_stylesheets')
 
     @stack('page_css')
+    <style>
+        .notification-dropdown .dropdown-header {
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+        }
+        .notification-dropdown .notification-list {
+            max-height: 280px;
+            overflow-y: auto;
+        }
+        .notification-dropdown .notification-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .notification-dropdown .notification-item:last-child {
+            border-bottom: none;
+        }
+        .notification-dropdown .notification-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        .notification-dropdown .notification-content p {
+            margin-bottom: 0.25rem;
+        }
+    </style>
     <livewire:styles />
 </head>
 
@@ -41,7 +70,7 @@
   <div class="wrapper">
   @if( Auth::user() )
       <!-- Main Header -->
-      @include('livewire.navbar')
+      @livewire('navbar')
 
       <!-- Left side column. contains the logo and sidebar -->
       @include('livewire.sidebar')

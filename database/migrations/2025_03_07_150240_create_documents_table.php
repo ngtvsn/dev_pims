@@ -18,8 +18,10 @@ class CreateDocumentsTable extends Migration
             $table->integer('status_type_id')->nullable(); // Active / Inactive
             $table->string('document_reference_code')->nullable();
             $table->integer('document_type_id')->nullable();
+            $table->integer('document_sub_type_id')->nullable();
             $table->string('document_title')->nullable();
-            $table->string('specify_attachments')->nullable();
+            $table->text('specify_attachments')->nullable();
+            $table->text('note')->nullable();
             $table->integer('office_id')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

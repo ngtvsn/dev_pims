@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Auth\Verify;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -33,7 +34,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 Route::get('/pages/css/css-form', CssForm::class)->name('css-form');
 Auth::routes(['verify' => true]);

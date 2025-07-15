@@ -19,4 +19,4 @@ Based on the file structure, the application appears to support the following fu
 
 ## User Experience Goals
 
-The primary goal of the user experience is to provide a clear, intuitive, and efficient interface for completing administrative tasks. The use of the AdminLTE theme suggests a focus on a functional, data-driven design.
+The primary goal of the user experience is to provide a clear, intuitive, and efficient interface for completing administrative tasks. While the application was originally built with the AdminLTE theme, there is an ongoing effort to modernize the user interface with a cleaner, more contemporary design using Bootstrap 5.

@@ -1,0 +1,55 @@
+
+[
+    {
+        "id": 1,
+        "document_type_name": "Procurement"
+    },
+    {
+        "id": 2,
+        "document_type_name": "Supply"
+    },
+    {
+        "id": 3,
+        "document_type_name": "Budget"
+    },
+    {
+        "id": 4,
+        "document_type_name": "Cash Advance"
+    },
+    {
+        "id": 5,
+        "document_type_name": "Financial and Accounting"
+    },
+    {
+        "id": 6,
+        "document_type_name": "FOI Request"
+    },
+    {
+        "id": 7,
+        "document_type_name": "Human Resource"
+    },
+    {
+        "id": 8,
+        "document_type_name": "Legal"
+    },
+    {
+        "id": 9,
+        "document_type_name": "Letter"
+    },
+    {
+        "id": 10,
+        "document_type_name": "Issuances"
+    },
+    {
+        "id": 11,
+        "document_type_name": "Payment"
+    },
+    {
+        "id": 12,
+        "document_type_name": "Payroll"
+    },
+    {
+        "id": 13,
+        "document_type_name": "Standards and Accreditation"
+    }
+]
