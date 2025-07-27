@@ -75,7 +75,7 @@ class IssuancesDocument extends Model implements Auditable
 
     public function scopeActive($query)
     {
-        return $query->where('status_type_id', 1); // Active status
+        return $query->whereIn('status_type_id', [1, 2]); // Draft and Published status
     }
 
     // Accessors

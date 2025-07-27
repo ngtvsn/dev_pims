@@ -569,8 +569,8 @@
         }
 
         .file-remove {
-            background: #fee2e2;
-            color: #dc2626;
+            background: #ef4444;
+            color: white;
             border: none;
             border-radius: 4px;
             padding: 0.25rem 0.5rem;
@@ -580,7 +580,35 @@
         }
 
         .file-remove:hover {
-            background: #fecaca;
+            background: #dc2626;
+        }
+
+        .preview-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .preview-button-container .btn-modern {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .preview-button-container .btn-secondary-modern {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .preview-button-container .btn-secondary-modern:hover {
+            background: #e5e7eb;
+            border-color: #9ca3af;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         /* Form Elements for Upload Modal */
@@ -1041,11 +1069,20 @@
                                                  <i class="fas fa-times"></i>
                                              </button>
                                          </div>
+                                         
+                                         @if(strtolower(pathinfo($uploadForm['file']->getClientOriginalName(), PATHINFO_EXTENSION)) === 'pdf')
+                                             <div class="preview-button-container" style="margin-top: 1rem;">
+                                                 <button type="button" wire:click="togglePreview" class="btn-modern btn-secondary-modern">
+                                                     <i class="fas {{ $showPreview ? 'fa-eye-slash' : 'fa-eye' }}"></i>
+                                                     {{ $showPreview ? 'Hide Preview' : 'Preview Document' }}
+                                                 </button>
+                                             </div>
+                                         @endif
                                      </div>
                                  @endif
                              </div>
                              
-                             @if($uploadForm['file'] ?? false)
+                             @if($uploadForm['file'] ?? false && $showPreview)
                                  <div class="col-md-6">
                                      <div class="pdf-preview-container">
                                          <h5 class="preview-title">

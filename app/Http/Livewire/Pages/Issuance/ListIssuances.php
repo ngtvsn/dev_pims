@@ -43,6 +43,9 @@ class ListIssuances extends Component
         'description' => '',
         'file' => null,
     ];
+    
+    // Preview state
+    public $showPreview = false;
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -164,11 +167,18 @@ class ListIssuances extends Component
             'description' => '',
             'file' => null,
         ];
+        $this->showPreview = false;
     }
 
     public function removeFile()
     {
         $this->uploadForm['file'] = null;
+        $this->showPreview = false;
+    }
+    
+    public function togglePreview()
+    {
+        $this->showPreview = !$this->showPreview;
     }
 
     public function uploadDocument()
@@ -265,9 +275,7 @@ class ListIssuances extends Component
     {
         return \App\Models\IssuancesDocumentSubType::with('documentType')
             ->where('document_type_id', 10) // Only Issuances document type
-            ->whereIn('id', [19, 20, 21, 22]) // Only PITAHC specific sub-types
-            ->whereNotNull('document_sub_type_name')
-            ->where('document_sub_type_name', '!=', '')
+            ->orderBy('document_sub_type_name')
             ->get();
     }
 
