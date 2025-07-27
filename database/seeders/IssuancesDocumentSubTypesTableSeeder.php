@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\IssuancesDocumentSubType;
 
-class DocumentSubTypesTableSeeder extends Seeder
+class IssuancesDocumentSubTypesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

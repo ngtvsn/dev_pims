@@ -4,16 +4,18 @@ namespace App\Http\Livewire\Pages\Issuance;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\IssuancesDocument;
 use App\Models\IssuancesDocumentType;
 use App\Models\IssuancesDocumentSubType;
 use App\Models\TransactingOffice;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
 class ListIssuances extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
     // Filter properties
     public $search = '';
@@ -30,6 +32,17 @@ class ListIssuances extends Component
     public $showDeleteModal = false;
     public $documentToDelete = null;
     public $loading = false;
+    public $showUploadModal = false;
+    
+    // Upload form properties
+    public $uploadForm = [
+        'title' => '',
+        'issuance_number' => '',
+        'document_sub_type_id' => '',
+        'document_date' => '',
+        'description' => '',
+        'file' => null,
+    ];
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -45,6 +58,7 @@ class ListIssuances extends Component
     protected $listeners = [
         'documentDeleted' => 'refreshDocuments',
         'documentUpdated' => 'refreshDocuments',
+        'openUploadModal' => 'openUploadModal',
     ];
 
     public function mount()
@@ -141,6 +155,83 @@ class ListIssuances extends Component
         // Refresh the component
     }
 
+    public function openUploadModal()
+    {
+        $this->resetUploadForm();
+        $this->showUploadModal = true;
+    }
+
+    public function closeUploadModal()
+    {
+        $this->showUploadModal = false;
+        $this->resetUploadForm();
+    }
+
+    public function resetUploadForm()
+    {
+        $this->uploadForm = [
+            'title' => '',
+            'issuance_number' => '',
+            'document_sub_type_id' => '',
+            'document_date' => '',
+            'description' => '',
+            'file' => null,
+        ];
+    }
+
+    public function removeFile()
+    {
+        $this->uploadForm['file'] = null;
+    }
+
+    public function uploadDocument()
+    {
+        $this->validate([
+            'uploadForm.title' => 'required|string|max:255',
+            'uploadForm.issuance_number' => 'required|string|max:100',
+            'uploadForm.document_sub_type_id' => 'required|exists:issuances_document_sub_types,id',
+            'uploadForm.document_date' => 'required|date',
+            'uploadForm.description' => 'nullable|string',
+            'uploadForm.file' => 'required|file|mimes:pdf,doc,docx|max:10240', // 10MB max
+        ]);
+
+        try {
+            // Store the uploaded file
+            $filePath = $this->uploadForm['file']->store('issuance-documents', 'public');
+            $originalName = $this->uploadForm['file']->getClientOriginalName();
+
+            // Get the document type from the selected sub type
+            $subType = \App\Models\IssuancesDocumentSubType::find($this->uploadForm['document_sub_type_id']);
+            
+            // Create the document record
+            IssuancesDocument::create([
+                'document_title' => $this->uploadForm['title'],
+                'document_reference_code' => $this->uploadForm['issuance_number'],
+                'document_type_id' => $subType->document_type_id,
+                'document_sub_type_id' => $this->uploadForm['document_sub_type_id'],
+                'note' => $this->uploadForm['description'],
+                'status_type_id' => 2, // Published status
+                'office_id' => auth()->user()->office_id ?? 1, // Default to office 1 if user has no office
+                'created_by' => auth()->id(),
+                'updated_by' => auth()->id(),
+            ]);
+
+            // Reset form and close modal
+            $this->resetUploadForm();
+            $this->closeUploadModal();
+
+            // Show success message
+            session()->flash('message', 'Document uploaded successfully!');
+
+            // Refresh the documents list
+            $this->resetPage();
+
+        } catch (\Exception $e) {
+            // Handle any errors
+            session()->flash('error', 'Failed to upload document: ' . $e->getMessage());
+        }
+    }
+
     public function getDocumentsProperty()
     {
         $query = IssuancesDocument::query()
@@ -185,8 +276,11 @@ class ListIssuances extends Component
 
     public function getDocumentSubTypesProperty()
     {
-        return IssuancesDocumentSubType::where('document_type_id', 10) // Issuances type
-            ->orderBy('document_sub_type_name')
+        return \App\Models\IssuancesDocumentSubType::with('documentType')
+            ->where('document_type_id', 10) // Only Issuances document type
+            ->whereIn('id', [19, 20, 21, 22]) // Only PITAHC specific sub-types
+            ->whereNotNull('document_sub_type_name')
+            ->where('document_sub_type_name', '!=', '')
             ->get();
     }
 

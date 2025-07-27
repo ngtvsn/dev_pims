@@ -363,6 +363,357 @@
             border: 2px dashed #e2e8f0;
         }
 
+        /* Upload Document Button Styles */
+        .upload-document-btn {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .upload-document-btn:hover {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-color: #0284c7;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+        }
+
+        .upload-btn-icon {
+            font-size: 1.5rem;
+            color: #0ea5e9;
+            flex-shrink: 0;
+        }
+
+        .upload-btn-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .upload-btn-title {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .upload-btn-subtitle {
+            color: #64748b;
+            font-size: 0.75rem;
+            margin: 0;
+        }
+
+        .upload-btn-arrow {
+            font-size: 0.875rem;
+            color: #0ea5e9;
+            flex-shrink: 0;
+        }
+
+        /* Upload Modal Styles */
+        .upload-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1050;
+        }
+
+        .upload-modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-premium);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .upload-modal-header {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .upload-modal-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .upload-modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition-smooth);
+        }
+
+        .upload-modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .upload-modal-body {
+            padding: 2rem;
+        }
+
+        .upload-section {
+            margin-bottom: 2rem;
+        }
+
+        .upload-section-title {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .file-upload-zone {
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            background: #f9fafb;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .file-upload-zone:hover {
+            border-color: #0ea5e9;
+            background: #f0f9ff;
+        }
+
+        .file-upload-zone.dragover {
+            border-color: #0ea5e9;
+            background: #e0f2fe;
+        }
+
+        .file-upload-icon {
+            font-size: 3rem;
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        .file-upload-text {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-upload-hint {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .uploaded-files {
+            margin-top: 1rem;
+        }
+
+        .uploaded-file {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: #f3f4f6;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-icon {
+            color: #0ea5e9;
+            font-size: 1.25rem;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+
+        .file-size {
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+
+        .file-remove {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: var(--transition-smooth);
+        }
+
+        .file-remove:hover {
+            background: #fecaca;
+        }
+
+        /* Form Elements for Upload Modal */
+        .form-group-modern {
+            margin-bottom: 1rem;
+        }
+
+        .form-label-modern {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .form-control-modern {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            transition: var(--transition-smooth);
+            background: white;
+        }
+
+        .form-control-modern:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+
+        .btn-modern {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary-modern {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+        }
+
+        .btn-primary-modern:hover {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-secondary-modern {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary-modern:hover {
+            background: #e5e7eb;
+            border-color: #9ca3af;
+        }
+
+        /* PDF Preview Styles */
+        .pdf-preview-container {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            height: 100%;
+        }
+
+        .preview-title {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pdf-preview {
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+        }
+
+        .pdf-viewer {
+            flex: 1;
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: white;
+        }
+
+        .preview-actions {
+            margin-top: 0.75rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .file-preview-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            text-align: center;
+            color: #6b7280;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+        }
+
+        .file-preview-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #9ca3af;
+        }
+
+        .file-preview-placeholder p {
+            margin: 0.5rem 0;
+            font-weight: 500;
+        }
+
+        .file-preview-placeholder small {
+            color: #9ca3af;
+        }
+
         @media (max-width: 768px) {
             .issuance-container {
                 padding: 1rem 0;
@@ -384,6 +735,14 @@
             
             .document-card-body {
                 padding: 1rem;
+            }
+
+            .upload-zone {
+                padding: 1rem 0.75rem;
+            }
+
+            .upload-icon {
+                font-size: 1.25rem;
             }
         }
     </style>
@@ -491,6 +850,18 @@
                                     </button>
                                 </div>
                             </div>
+
+                            <!-- Upload Document Button -->
+                            <div class="mt-3">
+                                <button type="button" wire:click="openUploadModal" class="upload-document-btn w-100">
+                                    <i class="fas fa-cloud-upload-alt upload-btn-icon"></i>
+                                    <div class="upload-btn-content">
+                                        <span class="upload-btn-title">Upload Document</span>
+                                        <small class="upload-btn-subtitle">Add new issuance document</small>
+                                    </div>
+                                    <i class="fas fa-chevron-right upload-btn-arrow"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -582,6 +953,146 @@
             </div>
         </div>
     </div>
+
+    <!-- Upload Document Modal -->
+    @if($showUploadModal)
+        <div class="upload-modal">
+            <div class="upload-modal-content">
+                <div class="upload-modal-header">
+                    <h3 class="upload-modal-title">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        Upload Document
+                    </h3>
+                    <button wire:click="closeUploadModal" class="upload-modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="upload-modal-body">
+                    <!-- Document Information Section -->
+                    <div class="upload-section">
+                        <h4 class="upload-section-title">
+                            <i class="fas fa-info-circle"></i>
+                            Document Information
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">Document Title *</label>
+                                    <input type="text" wire:model="uploadForm.title" class="form-control-modern" placeholder="Enter document title">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">Issuance Number *</label>
+                                    <input type="text" wire:model="uploadForm.issuance_number" class="form-control-modern" placeholder="Enter issuance number">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">Document Type *</label>
+                                    <select wire:model="uploadForm.document_sub_type_id" class="form-control-modern">
+                                        <option value="">Select document type</option>
+                                        @foreach($documentSubTypes as $subType)
+                                            @if($subType->documentType)
+                                                <option value="{{ $subType->id }}">{{ $subType->documentType->document_type_name }} - {{ $subType->document_sub_type_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">Document Date *</label>
+                                    <input type="date" wire:model="uploadForm.document_date" class="form-control-modern">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group-modern">
+                            <label class="form-label-modern">Description</label>
+                            <textarea wire:model="uploadForm.description" rows="3" class="form-control-modern" placeholder="Enter document description"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- File Upload Section -->
+                     <div class="upload-section">
+                         <h4 class="upload-section-title">
+                             <i class="fas fa-file-upload"></i>
+                             File Upload
+                         </h4>
+                         
+                         <div class="row">
+                             <div class="col-md-6">
+                                 <div class="file-upload-zone" onclick="document.getElementById('fileInput').click()">
+                                     <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                     <div class="file-upload-text">Click to upload or drag and drop</div>
+                                     <div class="file-upload-hint">PDF, DOC, DOCX files up to 10MB</div>
+                                     <input type="file" id="fileInput" wire:model="uploadForm.file" accept=".pdf,.doc,.docx" style="display: none;">
+                                 </div>
+                                 
+                                 @if($uploadForm['file'] ?? false)
+                                     <div class="uploaded-files">
+                                         <div class="uploaded-file">
+                                             <i class="fas fa-file-alt file-icon"></i>
+                                             <div class="file-info">
+                                                 <div class="file-name">{{ $uploadForm['file']->getClientOriginalName() }}</div>
+                                                 <div class="file-size">{{ number_format($uploadForm['file']->getSize() / 1024, 2) }} KB</div>
+                                             </div>
+                                             <button wire:click="removeFile" class="file-remove">
+                                                 <i class="fas fa-times"></i>
+                                             </button>
+                                         </div>
+                                     </div>
+                                 @endif
+                             </div>
+                             
+                             @if($uploadForm['file'] ?? false)
+                                 <div class="col-md-6">
+                                     <div class="pdf-preview-container">
+                                         <h5 class="preview-title">
+                                             <i class="fas fa-eye"></i>
+                                             Document Preview
+                                         </h5>
+                                         @if(strtolower(pathinfo($uploadForm['file']->getClientOriginalName(), PATHINFO_EXTENSION)) === 'pdf')
+                                             <div class="pdf-preview">
+                                                 <iframe 
+                                                     src="{{ $uploadForm['file']->temporaryUrl() }}" 
+                                                     class="pdf-viewer"
+                                                     frameborder="0">
+                                                 </iframe>
+                                                 <div class="preview-actions">
+                                                     <button type="button" onclick="window.open('{{ $uploadForm['file']->temporaryUrl() }}', '_blank')" class="btn-modern btn-secondary-modern">
+                                                         <i class="fas fa-external-link-alt"></i>
+                                                         Open in New Tab
+                                                     </button>
+                                                 </div>
+                                             </div>
+                                         @else
+                                             <div class="file-preview-placeholder">
+                                                 <i class="fas fa-file-alt"></i>
+                                                 <p>Preview not available for this file type</p>
+                                                 <small>Only PDF files can be previewed</small>
+                                             </div>
+                                         @endif
+                                     </div>
+                                 </div>
+                             @endif
+                         </div>
+                     </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-end" style="gap: 0.75rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+                        <button wire:click="closeUploadModal" class="btn-modern btn-secondary-modern">
+                            Cancel
+                        </button>
+                        <button wire:click="uploadDocument" class="btn-modern btn-primary-modern">
+                            <i class="fas fa-upload mr-2"></i>
+                            Upload Document
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <!-- Delete Confirmation Modal -->
     @if($showDeleteModal)
