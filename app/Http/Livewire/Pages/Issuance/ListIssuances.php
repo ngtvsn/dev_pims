@@ -63,22 +63,10 @@ class ListIssuances extends Component
 
     public function mount()
     {
-        // Set default date range to last 30 days
-        $this->dateTo = now()->format('Y-m-d');
-        $this->dateFrom = now()->subDays(30)->format('Y-m-d');
+        // Leave date fields blank initially
     }
 
-    public function updatingSearch()
-    {
-        $this->resetPage();
-        $this->loading = true;
-    }
-
-    public function updatingSubjectSearch()
-    {
-        $this->resetPage();
-        $this->loading = true;
-    }
+    // Removed automatic search triggers - users must click search button
 
     public function updatingDocumentTypeFilter()
     {
@@ -111,7 +99,6 @@ class ListIssuances extends Component
             'dateFrom',
             'dateTo'
         ]);
-        $this->mount(); // Reset to default date range
         $this->resetPage();
         $this->dispatchBrowserEvent('filters-cleared');
     }

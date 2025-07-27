@@ -801,7 +801,7 @@
                                 </div>
                                 <div class="form-group-modern mb-3">
                                     <label class="form-label-modern mb-1" style="font-size: 0.875rem;">Subject Search</label>
-                                    <textarea wire:model.debounce.500ms="subjectSearch" 
+                                    <textarea wire:model="subjectSearch" 
                                               class="form-control-modern" 
                                               style="padding: 0.375rem 0.75rem; font-size: 0.875rem; min-height: 60px; resize: vertical;"
                                               rows="2"
@@ -809,7 +809,7 @@
                                 </div>
                                 <div class="form-group-modern mb-0">
                                     <label class="form-label-modern mb-1" style="font-size: 0.875rem;">Issuance Number</label>
-                                    <input type="text" wire:model.debounce.500ms="issuanceNumber" 
+                                    <input type="text" wire:model="issuanceNumber" 
                                            class="form-control-modern" 
                                            style="padding: 0.375rem 0.75rem; font-size: 0.875rem;"
                                            placeholder="Enter issuance number...">
@@ -825,13 +825,13 @@
                                     <div class="col-12 mb-2">
                                         <div class="form-group-modern mb-2">
                                             <label class="form-label-modern mb-1" style="font-size: 0.875rem;">From Date</label>
-                                            <input type="date" wire:model="dateFrom" class="form-control-modern" style="padding: 0.375rem 0.75rem; font-size: 0.875rem;">
+                                            <input type="date" wire:model="dateFrom" class="form-control-modern" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; color: #000000;">
                                         </div>
                                     </div>
                                     <div class="col-12 mb-0">
                                         <div class="form-group-modern mb-0">
                                             <label class="form-label-modern mb-1" style="font-size: 0.875rem;">To Date</label>
-                                            <input type="date" wire:model="dateTo" class="form-control-modern" style="padding: 0.375rem 0.75rem; font-size: 0.875rem;">
+                                            <input type="date" wire:model="dateTo" class="form-control-modern" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; color: #000000;">
                                         </div>
                                     </div>
                                 </div>
