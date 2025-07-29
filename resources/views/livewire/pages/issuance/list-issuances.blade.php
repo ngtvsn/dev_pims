@@ -1036,7 +1036,7 @@
                             </div>
                         </div>
                         <div class="form-group-modern">
-                            <label class="form-label-modern">Description</label>
+                            <label class="form-label-modern">Description *</label>
                             <textarea wire:model="uploadForm.description" rows="3" class="form-control-modern" placeholder="Enter document description"></textarea>
                         </div>
                     </div>
@@ -1045,7 +1045,7 @@
                      <div class="upload-section">
                          <h4 class="upload-section-title">
                              <i class="fas fa-file-upload"></i>
-                             File Upload
+                             File Upload *
                          </h4>
                          
                          <div class="row">

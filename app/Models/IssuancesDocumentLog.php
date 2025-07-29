@@ -9,7 +9,7 @@ class IssuancesDocumentLog extends Model
 {
     use HasFactory;
 
-    protected $table = 'document_logs';
+    protected $table = 'issuance_document_logs';
 
     protected $fillable = [
         'document_id',

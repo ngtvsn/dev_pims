@@ -11,7 +11,7 @@ class IssuancesDocument extends Model implements Auditable
     use HasFactory;
     use \OwenIt\Auditing\Auditable;
 
-    protected $table = 'documents';
+    protected $table = 'issuance_documents';
 
     protected $fillable = [
         'status_type_id',
@@ -19,8 +19,11 @@ class IssuancesDocument extends Model implements Auditable
         'document_type_id',
         'document_sub_type_id',
         'document_title',
+        'document_date',
+        'description',
         'specify_attachments',
-        'note',
+        'file_path',
+        'original_filename',
         'office_id',
         'created_by',
         'updated_by',

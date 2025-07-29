@@ -186,9 +186,9 @@ class ListIssuances extends Component
         $this->validate([
             'uploadForm.title' => 'required|string|max:255',
             'uploadForm.issuance_number' => 'required|string|max:100',
-            'uploadForm.document_sub_type_id' => 'required|exists:issuances_document_sub_types,id',
+            'uploadForm.document_sub_type_id' => 'required|exists:issuance_document_sub_types,id',
             'uploadForm.document_date' => 'required|date',
-            'uploadForm.description' => 'nullable|string',
+            'uploadForm.description' => 'required|string|max:1000',
             'uploadForm.file' => 'required|file|mimes:pdf,doc,docx|max:10240', // 10MB max
         ]);
 
@@ -206,7 +206,10 @@ class ListIssuances extends Component
                 'document_reference_code' => $this->uploadForm['issuance_number'],
                 'document_type_id' => $subType->document_type_id,
                 'document_sub_type_id' => $this->uploadForm['document_sub_type_id'],
-                'note' => $this->uploadForm['description'],
+                'document_date' => $this->uploadForm['document_date'],
+                'description' => $this->uploadForm['description'],
+                'file_path' => $filePath,
+                'original_filename' => $originalName,
                 'status_type_id' => 2, // Published status
                 'office_id' => auth()->user()->office_id ?? 1, // Default to office 1 if user has no office
                 'created_by' => auth()->id(),
@@ -241,7 +244,7 @@ class ListIssuances extends Component
             $query->where(function($q) {
                 $q->where('document_title', 'like', '%' . $this->search . '%')
                   ->orWhere('document_reference_code', 'like', '%' . $this->search . '%')
-                  ->orWhere('note', 'like', '%' . $this->search . '%');
+                  ->orWhere('description', 'like', '%' . $this->search . '%');
             });
         }
 
