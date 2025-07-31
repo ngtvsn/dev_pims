@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class IssuancesDocument extends Model implements Auditable
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
     protected $table = 'issuance_documents';
@@ -27,12 +28,24 @@ class IssuancesDocument extends Model implements Auditable
         'office_id',
         'created_by',
         'updated_by',
+        'issuance_deleted_by',
+        'issuance_deletion_reason',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'issuance_deleted_at' => 'datetime',
     ];
+
+    protected $dates = ['issuance_deleted_at'];
+    
+    /**
+     * The name of the "deleted at" column.
+     *
+     * @var string
+     */
+    const DELETED_AT = 'issuance_deleted_at';
 
     // Relationships
     public function documentType()

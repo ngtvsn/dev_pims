@@ -31,6 +31,7 @@ class ListIssuances extends Component
     // UI state
     public $showDeleteModal = false;
     public $documentToDelete = null;
+    public $deletionReason = '';
     public $loading = false;
     public $showUploadModal = false;
     
@@ -116,28 +117,45 @@ class ListIssuances extends Component
     public function confirmDelete($documentId)
     {
         $this->documentToDelete = $documentId;
+        $this->deletionReason = '';
         $this->showDeleteModal = true;
     }
 
     public function deleteDocument()
     {
+        $this->validate([
+            'deletionReason' => 'required|string|min:5|max:500',
+        ], [
+            'deletionReason.required' => 'Please provide a reason for deletion.',
+            'deletionReason.min' => 'Deletion reason must be at least 5 characters.',
+            'deletionReason.max' => 'Deletion reason cannot exceed 500 characters.',
+        ]);
+
         if ($this->documentToDelete) {
             $document = IssuancesDocument::find($this->documentToDelete);
             if ($document) {
+                // Set deletion metadata before soft delete
+                $document->update([
+                    'issuance_deleted_by' => auth()->id(),
+                    'issuance_deletion_reason' => $this->deletionReason,
+                ]);
+                
+                // Perform soft delete using Laravel's built-in method
                 $document->delete();
+                
                 $this->dispatchBrowserEvent('document-deleted', [
                     'message' => 'Document deleted successfully!'
                 ]);
             }
         }
-        $this->showDeleteModal = false;
-        $this->documentToDelete = null;
+        $this->cancelDelete();
     }
 
     public function cancelDelete()
     {
         $this->showDeleteModal = false;
         $this->documentToDelete = null;
+        $this->deletionReason = '';
     }
 
     public function refreshDocuments()
@@ -180,6 +198,17 @@ class ListIssuances extends Component
     {
         $this->showPreview = !$this->showPreview;
     }
+    
+    public function updatedUploadFormFile()
+    {
+        // Automatically show preview for PDF files when uploaded
+        if ($this->uploadForm['file'] && 
+            strtolower(pathinfo($this->uploadForm['file']->getClientOriginalName(), PATHINFO_EXTENSION)) === 'pdf') {
+            $this->showPreview = true;
+        } else {
+            $this->showPreview = false;
+        }
+    }
 
     public function uploadDocument()
     {
@@ -220,15 +249,21 @@ class ListIssuances extends Component
             $this->resetUploadForm();
             $this->closeUploadModal();
 
-            // Show success message
-            session()->flash('message', 'Document uploaded successfully!');
+            // Dispatch success event for toastr notification
+            $this->dispatchBrowserEvent('document-uploaded', [
+                'message' => 'Document uploaded successfully!',
+                'type' => 'success'
+            ]);
 
             // Refresh the documents list
             $this->resetPage();
 
         } catch (\Exception $e) {
-            // Handle any errors
-            session()->flash('error', 'Failed to upload document: ' . $e->getMessage());
+            // Dispatch error event for toastr notification
+            $this->dispatchBrowserEvent('document-upload-failed', [
+                'message' => 'Failed to upload document: ' . $e->getMessage(),
+                'type' => 'error'
+            ]);
         }
     }
 
