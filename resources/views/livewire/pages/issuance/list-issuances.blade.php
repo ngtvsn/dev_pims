@@ -428,6 +428,8 @@
             align-items: center;
             justify-content: center;
             z-index: 1050;
+            opacity: 0;
+            animation: modalFadeIn 0.3s ease-out forwards;
         }
 
         .upload-modal-content {
@@ -438,6 +440,58 @@
             max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
+            transform: scale(0.9) translateY(-20px);
+            animation: modalSlideIn 0.3s ease-out forwards;
+        }
+
+        /* Modal Animation Keyframes */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: scale(0.9) translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalFadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes modalSlideOut {
+            from {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: scale(0.9) translateY(-20px);
+                opacity: 0;
+            }
+        }
+
+        /* Modal closing animation */
+        .upload-modal.closing {
+            animation: modalFadeOut 0.25s ease-in forwards;
+        }
+
+        .upload-modal.closing .upload-modal-content {
+            animation: modalSlideOut 0.25s ease-in forwards;
         }
 
         .upload-modal-header {
@@ -485,6 +539,34 @@
 
         .upload-section {
             margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: sectionFadeIn 0.4s ease-out 0.1s forwards;
+        }
+
+        .upload-section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .upload-section:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes sectionFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .upload-modal-actions {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: sectionFadeIn 0.4s ease-out 0.4s forwards;
         }
 
         .upload-section-title {
@@ -1117,7 +1199,7 @@
                      </div>
 
                     <!-- Action Buttons -->
-                    <div class="d-flex justify-content-end" style="gap: 0.75rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+                    <div class="d-flex justify-content-end upload-modal-actions" style="gap: 0.75rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                         <button wire:click="closeUploadModal" class="btn-modern btn-secondary-modern">
                             Cancel
                         </button>
@@ -1170,6 +1252,34 @@
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && document.querySelector('.modal.show')) {
                     @this.call('cancelDelete');
+                }
+                if (e.key === 'Escape' && document.querySelector('.upload-modal')) {
+                    closeUploadModalWithAnimation();
+                }
+            });
+
+            // Upload modal animation handling
+            window.closeUploadModalWithAnimation = function() {
+                const modal = document.querySelector('.upload-modal');
+                if (modal) {
+                    modal.classList.add('closing');
+                    setTimeout(() => {
+                        @this.call('closeUploadModal');
+                    }, 250); // Match the animation duration
+                }
+            };
+
+            // Override close button clicks to use animation
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.upload-modal-close') || 
+                    (e.target.closest('.btn-secondary-modern') && e.target.textContent.trim() === 'Cancel')) {
+                    e.preventDefault();
+                    closeUploadModalWithAnimation();
+                }
+                
+                // Close modal when clicking backdrop
+                if (e.target.classList.contains('upload-modal')) {
+                    closeUploadModalWithAnimation();
                 }
             });
         });
