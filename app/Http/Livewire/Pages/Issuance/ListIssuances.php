@@ -147,8 +147,11 @@ class ListIssuances extends Component
 
     public function openUploadModal()
     {
+        \Log::info('openUploadModal called');
         $this->resetUploadForm();
         $this->showUploadModal = true;
+        \Log::info('showUploadModal set to: ' . ($this->showUploadModal ? 'true' : 'false'));
+        $this->emit('modalStateChanged', $this->showUploadModal);
     }
 
     public function closeUploadModal()

@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-require('laravel-mix-artisan-serve');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,7 +11,4 @@ require('laravel-mix-artisan-serve');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css').serve({
-        host: '127.0.0.1',
-        port: '8002',
-      });
+    .sass('resources/sass/app.scss', 'public/css');
