@@ -428,16 +428,70 @@
             align-items: center;
             justify-content: center;
             z-index: 1050;
+            opacity: 0;
+            animation: modalFadeIn 0.3s ease-out forwards;
         }
 
         .upload-modal-content {
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-premium);
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
+            width: 95%;
+            max-width: 1400px;
+            max-height: 95vh;
             overflow-y: auto;
+            transform: scale(0.9) translateY(-20px);
+            animation: modalSlideIn 0.3s ease-out forwards;
+        }
+
+        /* Modal Animation Keyframes */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: scale(0.9) translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalFadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes modalSlideOut {
+            from {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: scale(0.9) translateY(-20px);
+                opacity: 0;
+            }
+        }
+
+        /* Modal closing animation */
+        .upload-modal.closing {
+            animation: modalFadeOut 0.25s ease-in forwards;
+        }
+
+        .upload-modal.closing .upload-modal-content {
+            animation: modalSlideOut 0.25s ease-in forwards;
         }
 
         .upload-modal-header {
@@ -485,6 +539,34 @@
 
         .upload-section {
             margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: sectionFadeIn 0.4s ease-out 0.1s forwards;
+        }
+
+        .upload-section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .upload-section:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes sectionFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .upload-modal-actions {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: sectionFadeIn 0.4s ease-out 0.4s forwards;
         }
 
         .upload-section-title {
@@ -742,6 +824,211 @@
             color: #9ca3af;
         }
 
+        /* Enhanced Modal Layout */
+        .upload-modal-main-row {
+            min-height: 600px;
+        }
+
+        .upload-form-column {
+            padding-right: 1.5rem;
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .upload-preview-column {
+            padding-left: 1.5rem;
+        }
+
+        /* Large PDF Preview Styles */
+        .pdf-preview-container-large {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            height: 100%;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .preview-header {
+            padding: 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-title-large {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .preview-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .pdf-preview-large {
+            flex: 1;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-viewer-large {
+            flex: 1;
+            width: 100%;
+            min-height: 500px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-placeholder-large {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #64748b;
+            padding: 2rem;
+        }
+
+        .preview-placeholder-large i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #94a3b8;
+        }
+
+        .preview-placeholder-large h5 {
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 0.75rem;
+        }
+
+        .preview-placeholder-large p {
+            margin-bottom: 1.5rem;
+            color: #64748b;
+        }
+
+        .upload-placeholder-large {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            height: 100%;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #64748b;
+            transition: all 0.3s ease;
+        }
+
+        .upload-placeholder-large:hover {
+            border-color: #94a3b8;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+        }
+
+        .upload-placeholder-large i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #94a3b8;
+        }
+
+        .upload-placeholder-large h4 {
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 0.75rem;
+        }
+
+        .upload-placeholder-large p {
+            margin-bottom: 2rem;
+            color: #64748b;
+        }
+
+        /* Button Styles */
+        .btn-outline-modern {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline-modern:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-info-modern {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-info-modern:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-outline-primary-modern {
+            background: transparent;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline-primary-modern:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .upload-form-column {
+                padding-right: 1rem;
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+                padding-bottom: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .upload-preview-column {
+                padding-left: 1rem;
+            }
+
+            .upload-modal-content {
+                width: 95%;
+                max-width: none;
+            }
+
+            .pdf-preview-container-large {
+                min-height: 400px;
+            }
+
+            .upload-placeholder-large {
+                min-height: 400px;
+            }
+        }
+
         @media (max-width: 768px) {
             .issuance-container {
                 padding: 1rem 0;
@@ -996,134 +1283,144 @@
                     </button>
                 </div>
                 <div class="upload-modal-body">
-                    <!-- Document Information Section -->
-                    <div class="upload-section">
-                        <h4 class="upload-section-title">
-                            <i class="fas fa-info-circle"></i>
-                            Document Information
-                        </h4>
-                        <div class="row">
-                            <div class="col-md-6">
+                    <div class="row upload-modal-main-row">
+                        <!-- Left Column: Form Content -->
+                        <div class="col-lg-6 upload-form-column">
+                            <!-- Document Information Section -->
+                            <div class="upload-section">
+                                <h4 class="upload-section-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    Document Information
+                                </h4>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group-modern">
+                                            <label class="form-label-modern">Document Title *</label>
+                                            <input type="text" wire:model="uploadForm.title" class="form-control-modern" placeholder="Enter document title">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group-modern">
+                                            <label class="form-label-modern">Issuance Number *</label>
+                                            <input type="text" wire:model="uploadForm.issuance_number" class="form-control-modern" placeholder="Enter issuance number">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group-modern">
+                                            <label class="form-label-modern">Document Type *</label>
+                                            <select wire:model="uploadForm.document_sub_type_id" class="form-control-modern">
+                                                <option value="">Select document type</option>
+                                                @foreach($documentSubTypes as $subType)
+                                                    @if($subType->documentType)
+                                                        <option value="{{ $subType->id }}">{{ $subType->documentType->document_type_name }} - {{ $subType->document_sub_type_name }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group-modern">
+                                            <label class="form-label-modern">Document Date *</label>
+                                            <input type="date" wire:model="uploadForm.document_date" class="form-control-modern">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group-modern">
-                                    <label class="form-label-modern">Document Title *</label>
-                                    <input type="text" wire:model="uploadForm.title" class="form-control-modern" placeholder="Enter document title">
+                                    <label class="form-label-modern">Description *</label>
+                                    <textarea wire:model="uploadForm.description" rows="3" class="form-control-modern" placeholder="Enter document description"></textarea>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group-modern">
-                                    <label class="form-label-modern">Issuance Number *</label>
-                                    <input type="text" wire:model="uploadForm.issuance_number" class="form-control-modern" placeholder="Enter issuance number">
+
+                            <!-- File Upload Section -->
+                            <div class="upload-section">
+                                <h4 class="upload-section-title">
+                                    <i class="fas fa-file-upload"></i>
+                                    File Upload *
+                                </h4>
+                                
+                                <div class="file-upload-zone" onclick="document.getElementById('fileInput').click()">
+                                    <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                    <div class="file-upload-text">Click to upload or drag and drop</div>
+                                    <div class="file-upload-hint">PDF, DOC, DOCX files up to 10MB</div>
+                                    <input type="file" id="fileInput" wire:model="uploadForm.file" accept=".pdf,.doc,.docx" style="display: none;">
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group-modern">
-                                    <label class="form-label-modern">Document Type *</label>
-                                    <select wire:model="uploadForm.document_sub_type_id" class="form-control-modern">
-                                        <option value="">Select document type</option>
-                                        @foreach($documentSubTypes as $subType)
-                                            @if($subType->documentType)
-                                                <option value="{{ $subType->id }}">{{ $subType->documentType->document_type_name }} - {{ $subType->document_sub_type_name }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group-modern">
-                                    <label class="form-label-modern">Document Date *</label>
-                                    <input type="date" wire:model="uploadForm.document_date" class="form-control-modern">
-                                </div>
+                                
+                                @if($uploadForm['file'] ?? false)
+                                    <div class="uploaded-files">
+                                        <div class="uploaded-file">
+                                            <i class="fas fa-file-alt file-icon"></i>
+                                            <div class="file-info">
+                                                <div class="file-name">{{ $uploadForm['file']->getClientOriginalName() }}</div>
+                                                <div class="file-size">{{ number_format($uploadForm['file']->getSize() / 1024, 2) }} KB</div>
+                                            </div>
+                                            <button wire:click="removeFile" class="file-remove">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group-modern">
-                            <label class="form-label-modern">Description *</label>
-                            <textarea wire:model="uploadForm.description" rows="3" class="form-control-modern" placeholder="Enter document description"></textarea>
+                        
+                        <!-- Right Column: PDF Preview -->
+                        <div class="col-lg-6 upload-preview-column">
+                            @if($uploadForm['file'] ?? false)
+                                <div class="pdf-preview-container-large">
+                                    <div class="preview-header">
+                                        <h4 class="preview-title-large">
+                                            <i class="fas fa-eye"></i>
+                                            Document Preview
+                                        </h4>
+                                    </div>
+                                    
+                                    @if(strtolower(pathinfo($uploadForm['file']->getClientOriginalName(), PATHINFO_EXTENSION)) === 'pdf')
+
+                                        <div class="pdf-preview-large" id="pdfPreviewContainer">
+                                            <div class="pdf-loading" id="pdfLoading" style="display: flex; align-items: center; justify-content: center; height: 500px; background: #f8fafc;">
+                                                <div style="text-align: center;">
+                                                    <div class="spinner" style="margin: 0 auto 1rem;"></div>
+                                                    <p style="color: #6b7280; margin: 0;">Loading PDF preview...</p>
+                                                    <p style="color: #9ca3af; margin-top: 0.5rem; font-size: 0.875rem;">If this takes too long, try the "Test Direct Link" button above</p>
+                                                </div>
+                                            </div>
+
+                                            <iframe 
+                                                src="{{ $uploadForm['file']->temporaryUrl() }}#toolbar=0&navpanes=0&scrollbar=0" 
+                                                class="pdf-viewer-large"
+                                                frameborder="0"
+                                                style="display: none;"
+                                                onload="document.getElementById('pdfLoading').style.display='none'; this.style.display='block';"
+                                                onerror="document.getElementById('pdfLoading').innerHTML='<div style=\"text-align: center; color: #dc2626; padding: 2rem;\"><i class=\"fas fa-exclamation-triangle\" style=\"font-size: 2rem; margin-bottom: 1rem;\"></i><h5>Failed to load PDF preview</h5><p>The PDF file could not be displayed in the iframe.</p><p><small>This might be due to browser security restrictions.</small></p><a href=\"{{ $uploadForm['file']->temporaryUrl() }}\" target=\"_blank\" class=\"btn btn-primary btn-sm\"><i class=\"fas fa-external-link-alt\"></i> Open in new tab</a></div>';">
+                                                <p>Your browser does not support PDFs. <a href="{{ $uploadForm['file']->temporaryUrl() }}" target="_blank">Download the PDF</a>.</p>
+                                            </iframe>
+                                        </div>
+                                    @else
+                                        <div class="preview-placeholder-large">
+                                            <i class="fas fa-file-alt"></i>
+                                            <h5>Preview Not Available</h5>
+                                            <p>Only PDF files can be previewed</p>
+                                            <small class="text-muted">{{ $uploadForm['file']->getClientOriginalName() }}</small>
+                                        </div>
+                                    @endif
+                                </div>
+                            @else
+                                <div class="upload-placeholder-large">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h4>Upload a Document</h4>
+                    <p>Select a file to see the preview here</p>
+                </div>
+                            @endif
                         </div>
                     </div>
 
-                    <!-- File Upload Section -->
-                     <div class="upload-section">
-                         <h4 class="upload-section-title">
-                             <i class="fas fa-file-upload"></i>
-                             File Upload *
-                         </h4>
-                         
-                         <div class="row">
-                             <div class="col-md-6">
-                                 <div class="file-upload-zone" onclick="document.getElementById('fileInput').click()">
-                                     <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
-                                     <div class="file-upload-text">Click to upload or drag and drop</div>
-                                     <div class="file-upload-hint">PDF, DOC, DOCX files up to 10MB</div>
-                                     <input type="file" id="fileInput" wire:model="uploadForm.file" accept=".pdf,.doc,.docx" style="display: none;">
-                                 </div>
-                                 
-                                 @if($uploadForm['file'] ?? false)
-                                     <div class="uploaded-files">
-                                         <div class="uploaded-file">
-                                             <i class="fas fa-file-alt file-icon"></i>
-                                             <div class="file-info">
-                                                 <div class="file-name">{{ $uploadForm['file']->getClientOriginalName() }}</div>
-                                                 <div class="file-size">{{ number_format($uploadForm['file']->getSize() / 1024, 2) }} KB</div>
-                                             </div>
-                                             <button wire:click="removeFile" class="file-remove">
-                                                 <i class="fas fa-times"></i>
-                                             </button>
-                                         </div>
-                                         
-                                         @if(strtolower(pathinfo($uploadForm['file']->getClientOriginalName(), PATHINFO_EXTENSION)) === 'pdf')
-                                             <div class="preview-button-container" style="margin-top: 1rem;">
-                                                 <button type="button" wire:click="togglePreview" class="btn-modern btn-secondary-modern">
-                                                     <i class="fas {{ $showPreview ? 'fa-eye-slash' : 'fa-eye' }}"></i>
-                                                     {{ $showPreview ? 'Hide Preview' : 'Preview Document' }}
-                                                 </button>
-                                             </div>
-                                         @endif
-                                     </div>
-                                 @endif
-                             </div>
-                             
-                             @if($uploadForm['file'] ?? false && $showPreview)
-                                 <div class="col-md-6">
-                                     <div class="pdf-preview-container">
-                                         <h5 class="preview-title">
-                                             <i class="fas fa-eye"></i>
-                                             Document Preview
-                                         </h5>
-                                         @if(strtolower(pathinfo($uploadForm['file']->getClientOriginalName(), PATHINFO_EXTENSION)) === 'pdf')
-                                             <div class="pdf-preview">
-                                                 <iframe 
-                                                     src="{{ $uploadForm['file']->temporaryUrl() }}" 
-                                                     class="pdf-viewer"
-                                                     frameborder="0">
-                                                 </iframe>
-                                                 <div class="preview-actions">
-                                                     <button type="button" onclick="window.open('{{ $uploadForm['file']->temporaryUrl() }}', '_blank')" class="btn-modern btn-secondary-modern">
-                                                         <i class="fas fa-external-link-alt"></i>
-                                                         Open in New Tab
-                                                     </button>
-                                                 </div>
-                                             </div>
-                                         @else
-                                             <div class="file-preview-placeholder">
-                                                 <i class="fas fa-file-alt"></i>
-                                                 <p>Preview not available for this file type</p>
-                                                 <small>Only PDF files can be previewed</small>
-                                             </div>
-                                         @endif
-                                     </div>
-                                 </div>
-                             @endif
-                         </div>
-                     </div>
-
                     <!-- Action Buttons -->
-                    <div class="d-flex justify-content-end" style="gap: 0.75rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+                    <div class="d-flex justify-content-end upload-modal-actions" style="gap: 0.75rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                         <button wire:click="closeUploadModal" class="btn-modern btn-secondary-modern">
                             Cancel
                         </button>
-                        <button wire:click="uploadDocument" class="btn-modern btn-primary-modern">
+                        <button wire:click="uploadDocument" class="btn-modern btn-primary-modern" @if($uploadForm['file'] ?? false && strtolower(pathinfo($uploadForm['file']->getClientOriginalName(), PATHINFO_EXTENSION)) === 'pdf') onclick="this.blur(); setTimeout(() => { if(!this.disabled) { document.querySelector('.pdf-viewer-large iframe')?.scrollIntoView({behavior: 'smooth', block: 'center'}); } }, 100);" @endif>
                             <i class="fas fa-upload mr-2"></i>
-                            Upload Document
+                            Post Document
                         </button>
                     </div>
                 </div>
@@ -1142,13 +1439,37 @@
                         </h5>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to delete this document? This action cannot be undone.</p>
+                        <p class="mb-3">Are you sure you want to delete this document? Please provide a reason for deletion.</p>
+                        
+                        <div class="form-group">
+                            <label for="deletionReason" class="form-label">
+                                Reason for Deletion <span class="text-danger">*</span>
+                            </label>
+                            <textarea 
+                                wire:model.live="deletionReason"
+                                id="deletionReason"
+                                class="form-control @error('deletionReason') is-invalid @enderror"
+                                rows="4"
+                                placeholder="Please explain why this document needs to be deleted..."
+                                maxlength="500"
+                                style="resize: none;"></textarea>
+                            @error('deletionReason')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <small class="form-text text-muted">
+                                {{ strlen($deletionReason) }}/500 characters
+                            </small>
+                        </div>
                     </div>
                     <div class="modal-footer" style="border-top: 1px solid #e5e7eb;">
                         <button type="button" wire:click="cancelDelete" class="btn-modern btn-secondary-modern">
                             Cancel
                         </button>
-                        <button type="button" wire:click="deleteDocument" class="btn-modern" style="background: #dc2626; color: white;">
+                        <button type="button" 
+                                wire:click="deleteDocument" 
+                                class="btn-modern" 
+                                @if(strlen($deletionReason) < 5) disabled @endif
+                                style="@if(strlen($deletionReason) < 5) background: #9ca3af; cursor: not-allowed; color: #6b7280; @else background: #dc2626; color: white; @endif">
                             <i class="fas fa-trash mr-1"></i>Delete
                         </button>
                     </div>
@@ -1162,14 +1483,51 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Toast notifications
             window.addEventListener('document-deleted', event => {
-                // You can integrate with your existing toast system here
-                console.log(event.detail.message);
+                toastr.success(event.detail.message, 'Success!');
+            });
+
+            // Upload success notification
+            window.addEventListener('document-uploaded', event => {
+                toastr.success(event.detail.message, 'Upload Successful!');
+            });
+
+            // Upload failure notification
+            window.addEventListener('document-upload-failed', event => {
+                toastr.error(event.detail.message, 'Upload Failed!');
             });
 
             // Keyboard shortcuts
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && document.querySelector('.modal.show')) {
                     @this.call('cancelDelete');
+                }
+                if (e.key === 'Escape' && document.querySelector('.upload-modal')) {
+                    closeUploadModalWithAnimation();
+                }
+            });
+
+            // Upload modal animation handling
+            window.closeUploadModalWithAnimation = function() {
+                const modal = document.querySelector('.upload-modal');
+                if (modal) {
+                    modal.classList.add('closing');
+                    setTimeout(() => {
+                        @this.call('closeUploadModal');
+                    }, 250); // Match the animation duration
+                }
+            };
+
+            // Override close button clicks to use animation
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.upload-modal-close') || 
+                    (e.target.closest('.btn-secondary-modern') && e.target.textContent.trim() === 'Cancel')) {
+                    e.preventDefault();
+                    closeUploadModalWithAnimation();
+                }
+                
+                // Close modal when clicking backdrop
+                if (e.target.classList.contains('upload-modal')) {
+                    closeUploadModalWithAnimation();
                 }
             });
         });
