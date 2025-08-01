@@ -28,6 +28,9 @@ class CreateIssuanceDocumentsTable extends Migration
             $table->integer('office_id'); // Made mandatory
             $table->integer('created_by'); // Made mandatory
             $table->integer('updated_by'); // Made mandatory
+            $table->softDeletes();
+            $table->integer('deleted_by')->nullable();
+            $table->text('deletion_reason')->nullable();
             $table->timestamps();
         });
     }
