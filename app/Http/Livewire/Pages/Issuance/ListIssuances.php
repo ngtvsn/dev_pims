@@ -34,15 +34,25 @@ class ListIssuances extends Component
     public $deletionReason = '';
     public $loading = false;
     public $showUploadModal = false;
-    
-    // Upload form properties
+    public $showEditModal = false;
+
+    // Form properties
+    public $editingDocument = null;
     public $uploadForm = [
         'title' => '',
         'issuance_number' => '',
         'document_sub_type_id' => '',
         'document_date' => '',
-        'description' => '',
         'file' => null,
+    ];
+    public $editForm = [
+        'id' => null,
+        'title' => '',
+        'issuance_number' => '',
+        'document_sub_type_id' => '',
+        'document_date' => '',
+        'file' => null,
+        'current_file_path' => '',
     ];
     
     // Preview state
@@ -175,6 +185,94 @@ class ListIssuances extends Component
         $this->resetUploadForm();
     }
 
+    public function openEditModal($documentId)
+    {
+        $document = IssuancesDocument::findOrFail($documentId);
+        $this->editingDocument = $document;
+        $this->editForm = [
+            'id' => $document->id,
+            'title' => $document->document_title,
+            'issuance_number' => $document->document_reference_code,
+            'document_sub_type_id' => $document->document_sub_type_id,
+            'document_date' => Carbon::parse($document->document_date)->format('Y-m-d'),
+            'file' => null, // New file is optional
+            'current_file_path' => $document->file_path,
+        ];
+        $this->showEditModal = true;
+    }
+
+    public function closeEditModal()
+    {
+        $this->showEditModal = false;
+        $this->editingDocument = null;
+        $this->reset('editForm');
+    }
+
+    public function updateDocument()
+    {
+        $this->validate([
+            'editForm.title' => 'required|string|max:1000',
+            'editForm.issuance_number' => 'required|string|max:100',
+            'editForm.document_sub_type_id' => 'required|exists:issuance_document_sub_types,id',
+            'editForm.document_date' => 'required|date',
+            'editForm.file' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // 10MB max, optional
+        ]);
+
+        try {
+            $originalDocument = IssuancesDocument::findOrFail($this->editForm['id']);
+
+            // Create a new record for the new version
+            $newDocumentData = [
+                'document_title' => $this->editForm['title'],
+                'document_reference_code' => $this->editForm['issuance_number'],
+                'document_sub_type_id' => $this->editForm['document_sub_type_id'],
+                'document_date' => $this->editForm['document_date'],
+                'status_type_id' => $originalDocument->status_type_id,
+                'office_id' => $originalDocument->office_id,
+                'created_by' => $originalDocument->created_by, // Keep original creator
+                'updated_by' => auth()->id(),
+                'version_of_id' => $originalDocument->id, // Link to the original document
+            ];
+
+            // Handle file upload if a new file is provided
+            if ($this->editForm['file']) {
+                $filePath = $this->editForm['file']->store('issuance-documents', 'public');
+                $originalName = $this->editForm['file']->getClientOriginalName();
+                $newDocumentData['file_path'] = $filePath;
+                $newDocumentData['original_filename'] = $originalName;
+            } else {
+                // If no new file, use the old file path
+                $newDocumentData['file_path'] = $originalDocument->file_path;
+                $newDocumentData['original_filename'] = $originalDocument->original_filename;
+            }
+
+            // Get the document type from the selected sub type
+            $subType = \App\Models\IssuancesDocumentSubType::find($this->editForm['document_sub_type_id']);
+            $newDocumentData['document_type_id'] = $subType->document_type_id;
+
+            // Create the new version
+            $newVersion = IssuancesDocument::create($newDocumentData);
+
+            // Deactivate the old document by setting its status to 'archived' or similar
+            $originalDocument->update(['status_type_id' => 4]); // Assuming 4 is 'Archived' or 'Superseded'
+
+            $this->closeEditModal();
+
+            $this->dispatchBrowserEvent('document-updated', [
+                'message' => 'Document updated successfully! A new version has been created.',
+                'type' => 'success'
+            ]);
+
+            $this->resetPage();
+
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('document-update-failed', [
+                'message' => 'Failed to update document: ' . $e->getMessage(),
+                'type' => 'error'
+            ]);
+        }
+    }
+
     public function resetUploadForm()
     {
         $this->uploadForm = [
@@ -182,7 +280,6 @@ class ListIssuances extends Component
             'issuance_number' => '',
             'document_sub_type_id' => '',
             'document_date' => '',
-            'description' => '',
             'file' => null,
         ];
         $this->showPreview = false;
@@ -213,11 +310,10 @@ class ListIssuances extends Component
     public function uploadDocument()
     {
         $this->validate([
-            'uploadForm.title' => 'required|string|max:255',
+            'uploadForm.title' => 'required|string|max:1000',
             'uploadForm.issuance_number' => 'required|string|max:100',
             'uploadForm.document_sub_type_id' => 'required|exists:issuance_document_sub_types,id',
             'uploadForm.document_date' => 'required|date',
-            'uploadForm.description' => 'required|string|max:1000',
             'uploadForm.file' => 'required|file|mimes:pdf,doc,docx|max:10240', // 10MB max
         ]);
 
@@ -236,7 +332,6 @@ class ListIssuances extends Component
                 'document_type_id' => $subType->document_type_id,
                 'document_sub_type_id' => $this->uploadForm['document_sub_type_id'],
                 'document_date' => $this->uploadForm['document_date'],
-                'description' => $this->uploadForm['description'],
                 'file_path' => $filePath,
                 'original_filename' => $originalName,
                 'status_type_id' => 2, // Published status
@@ -270,7 +365,7 @@ class ListIssuances extends Component
     public function getDocumentsProperty()
     {
         $query = IssuancesDocument::query()
-            ->with(['documentType', 'documentSubType', 'office', 'creator'])
+            ->with(['documentType', 'documentSubType', 'office', 'creator', 'versions'])
             ->issuances() // Only issuance documents
             ->active(); // Only active documents
 
@@ -278,8 +373,7 @@ class ListIssuances extends Component
         if ($this->search) {
             $query->where(function($q) {
                 $q->where('document_title', 'like', '%' . $this->search . '%')
-                  ->orWhere('document_reference_code', 'like', '%' . $this->search . '%')
-                  ->orWhere('description', 'like', '%' . $this->search . '%');
+                  ->orWhere('document_reference_code', 'like', '%' . $this->search . '%');
             });
         }
 

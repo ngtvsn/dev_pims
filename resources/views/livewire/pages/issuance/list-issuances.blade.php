@@ -74,6 +74,13 @@
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             border-left: 4px solid var(--primary-blue);
+            transition: var(--transition-smooth);
+        }
+
+        .filter-section:hover {
+            background: #f1f5f9;
+            border-left-color: var(--emerald-accent);
+            transform: translateX(2px);
         }
 
         .filter-section-title {
@@ -104,12 +111,19 @@
             font-size: 0.875rem;
             transition: var(--transition-smooth);
             background: white;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .form-control-modern:focus {
             border-color: var(--primary-blue);
             box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
             outline: none;
+            transform: translateY(-1px);
+        }
+
+        .form-control-modern:hover {
+            border-color: #cbd5e1;
         }
 
         .btn-modern {
@@ -209,20 +223,104 @@
             cursor: pointer;
             transition: var(--transition-smooth);
             margin: 0 0.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .action-btn:hover::before {
+            width: 100px;
+            height: 100px;
         }
 
         .action-btn-edit {
             background: #dbeafe;
             color: #1e40af;
+            border: 1px solid #bfdbfe;
         }
 
         .action-btn-delete {
             background: #fee2e2;
             color: #dc2626;
+            border: 1px solid #fecaca;
         }
 
         .action-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.05) translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .action-btn-edit:hover {
+            background: #bfdbfe;
+            border-color: #93c5fd;
+        }
+
+        .action-btn-delete:hover {
+            background: #fecaca;
+            border-color: #fca5a5;
+        }
+
+        /* Enhanced Search Input Styles */
+        .search-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-size: 0.875rem;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .search-input {
+            padding-left: 2.5rem !important;
+        }
+
+        .clear-search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 50%;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 2;
+        }
+
+        .clear-search-btn:hover {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        .clear-search-btn:active {
+            transform: translateY(-50%) scale(0.95);
         }
 
         .loading-overlay {
@@ -274,9 +372,23 @@
 
         .document-cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
-            padding: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        @media (max-width: 1200px) {
+            .document-cards-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .document-cards-container {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
         }
 
         .document-card {
@@ -286,11 +398,20 @@
             border: 1px solid #e2e8f0;
             transition: var(--transition-smooth);
             overflow: hidden;
+            position: relative;
         }
 
         .document-card:hover {
             box-shadow: var(--shadow-premium);
             transform: translateY(-2px);
+        }
+
+        .document-card.compact {
+            min-height: auto;
+        }
+
+        .document-card.expanded {
+            min-height: auto;
         }
 
         .document-card-header {
@@ -305,11 +426,30 @@
         .document-number {
             font-weight: 600;
             color: var(--primary-blue);
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             background: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 6px;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
             border: 1px solid #e2e8f0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .document-card.compact .document-number {
+            font-size: 0.7rem;
+            padding: 0.125rem 0.375rem;
+            max-width: 120px;
+        }
+
+        .document-number:hover {
+            background: #f0f9ff;
+            border-color: var(--primary-blue);
+            transform: scale(1.02);
+            transition: all 0.2s ease;
         }
 
         .document-actions {
@@ -318,39 +458,120 @@
         }
 
         .document-card-body {
-            padding: 1.25rem;
+            padding: 1rem;
+        }
+
+        .document-card-body.compact {
+            padding: 0.75rem;
         }
 
         .document-title {
             font-weight: 600;
             color: #1f2937;
-            margin-bottom: 1rem;
-            line-height: 1.4;
-            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            font-size: 0.875rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .document-title-link {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .document-title-link:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .document-card.compact .document-title {
+            font-size: 0.8rem;
+            margin-bottom: 0.375rem;
+            -webkit-line-clamp: 1;
+        }
+
+        .document-card-body:hover {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            z-index: 10;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .document-card-body.compact:hover {
+            padding: 0.875rem;
+        }
+
+        .document-card-body:hover .document-title {
+            -webkit-line-clamp: unset;
+            overflow: visible;
+            margin-bottom: 0.75rem;
+        }
+
+        .document-card-body:hover .document-meta {
+            margin-top: 0.5rem;
         }
 
         .document-meta {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
 
         .meta-item {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            align-items: flex-start;
+            gap: 0.375rem;
+            margin-bottom: 0.25rem;
+            padding: 0.25rem 0;
+            border-radius: 4px;
+            transition: var(--transition-smooth);
+        }
+
+        .document-card.compact .meta-item {
+            gap: 0.25rem;
+            margin-bottom: 0.125rem;
+            padding: 0.125rem 0;
+        }
+
+        .meta-item:hover {
+            background: #f8fafc;
         }
 
         .meta-label {
             font-weight: 500;
             color: var(--modern-gray);
-            font-size: 0.875rem;
-            min-width: 40px;
+            font-size: 0.75rem;
+            min-width: 60px;
+            flex-shrink: 0;
+        }
+
+        .document-card.compact .meta-label {
+            font-size: 0.7rem;
+            min-width: 50px;
         }
 
         .meta-value {
             color: #374151;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.3;
+        }
+
+        .document-card.compact .meta-value {
+            font-size: 0.7rem;
         }
 
         .empty-state-card {
@@ -1049,8 +1270,14 @@
             }
             
             .document-card-body {
-                padding: 1rem;
-            }
+            padding: 0.75rem;
+        }
+
+        .document-card-body.compact {
+            padding: 0.5rem 0.75rem;
+        }
+
+
 
             .upload-zone {
                 padding: 1rem 0.75rem;
@@ -1116,18 +1343,34 @@
                                 </div>
                                 <div class="form-group-modern mb-3">
                                     <label class="form-label-modern mb-1" style="font-size: 0.875rem;">Subject Search</label>
-                                    <textarea wire:model="subjectSearch" 
-                                              class="form-control-modern" 
-                                              style="padding: 0.375rem 0.75rem; font-size: 0.875rem; min-height: 60px; resize: vertical;"
-                                              rows="2"
-                                              placeholder="Enter document subject..."></textarea>
+                                    <div class="search-input-wrapper">
+                                        <i class="fas fa-search search-icon"></i>
+                                        <textarea wire:model="subjectSearch" 
+                                                  class="form-control-modern search-input" 
+                                                  style="padding: 0.375rem 0.75rem 0.375rem 2.5rem; font-size: 0.875rem; min-height: 60px; resize: vertical;"
+                                                  rows="2"
+                                                  placeholder="Enter document subject..."></textarea>
+                                        @if($subjectSearch)
+                                            <button wire:click="$set('subjectSearch', '')" class="clear-search-btn" type="button">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="form-group-modern mb-0">
                                     <label class="form-label-modern mb-1" style="font-size: 0.875rem;">Issuance Number</label>
-                                    <input type="text" wire:model="issuanceNumber" 
-                                           class="form-control-modern" 
-                                           style="padding: 0.375rem 0.75rem; font-size: 0.875rem;"
-                                           placeholder="Enter issuance number...">
+                                    <div class="search-input-wrapper">
+                                        <i class="fas fa-hashtag search-icon"></i>
+                                        <input type="text" wire:model="issuanceNumber" 
+                                               class="form-control-modern search-input" 
+                                               style="padding: 0.375rem 0.75rem 0.375rem 2.5rem; font-size: 0.875rem;"
+                                               placeholder="Enter issuance number...">
+                                        @if($issuanceNumber)
+                                            <button wire:click="$set('issuanceNumber', '')" class="clear-search-btn" type="button">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
 
@@ -1216,13 +1459,13 @@
                         <!-- Document Cards Grid -->
                         <div class="document-cards-container">
                             @forelse($documents as $document)
-                                <div class="document-card">
+                                <div class="document-card compact">
                                     <div class="document-card-header">
                                         <div class="document-number">
                                             {{ $document->document_reference_code ?: 'DOC-' . str_pad($document->id, 4, '0', STR_PAD_LEFT) }}
                                         </div>
                                         <div class="document-actions">
-                                            <button class="action-btn action-btn-edit" title="Edit Document">
+                                            <button wire:click="openEditModal({{ $document->id }})" class="action-btn action-btn-edit" title="Edit Document">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <button wire:click="confirmDelete({{ $document->id }})" 
@@ -1232,8 +1475,11 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="document-card-body">
-                                        <h6 class="document-title">{{ $document->document_title ?: 'Untitled Document' }}</h6>
+                                    <div class="document-card-body compact">
+                                        <a href="{{ Storage::url($document->file_path) }}" target="_blank" class="document-title-link">
+                                            <h6 class="document-title">{{ $document->document_title ?: 'Untitled Document' }}</h6>
+                                        </a>
+                                        
                                         <div class="document-meta">
                                             <div class="meta-item">
                                                 <span class="meta-label">Type:</span>
@@ -1246,6 +1492,19 @@
                                                 <span class="meta-value">{{ $document->formatted_date }}</span>
                                             </div>
                                         </div>
+
+                                        @if($document->versions->count() > 0)
+                                            <div class="document-versions">
+                                                <h6 class="versions-title">Versions</h6>
+                                                <ul class="versions-list">
+                                                    @foreach($document->versions as $version)
+                                                        <li>
+                                                            <a href="{{ Storage::url($version->file_path) }}" target="_blank">{{ $version->document_title }} ({{ $version->formatted_date }})</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             @empty
@@ -1296,19 +1555,19 @@
                                     <div class="col-12">
                                         <div class="form-group-modern">
                                             <label class="form-label-modern">Document Title *</label>
-                                            <input type="text" wire:model="uploadForm.title" class="form-control-modern" placeholder="Enter document title">
+                                            <textarea wire:model.defer="uploadForm.title" rows="3" class="form-control-modern" placeholder="Enter document title"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group-modern">
                                             <label class="form-label-modern">Issuance Number *</label>
-                                            <input type="text" wire:model="uploadForm.issuance_number" class="form-control-modern" placeholder="Enter issuance number">
+                                            <input type="text" wire:model.defer="uploadForm.issuance_number" class="form-control-modern" placeholder="Enter issuance number">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group-modern">
                                             <label class="form-label-modern">Document Type *</label>
-                                            <select wire:model="uploadForm.document_sub_type_id" class="form-control-modern">
+                                            <select wire:model.defer="uploadForm.document_sub_type_id" class="form-control-modern">
                                                 <option value="">Select document type</option>
                                                 @foreach($documentSubTypes as $subType)
                                                     @if($subType->documentType)
@@ -1321,14 +1580,11 @@
                                     <div class="col-12">
                                         <div class="form-group-modern">
                                             <label class="form-label-modern">Document Date *</label>
-                                            <input type="date" wire:model="uploadForm.document_date" class="form-control-modern">
+                                            <input type="date" wire:model.defer="uploadForm.document_date" class="form-control-modern">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group-modern">
-                                    <label class="form-label-modern">Description *</label>
-                                    <textarea wire:model="uploadForm.description" rows="3" class="form-control-modern" placeholder="Enter document description"></textarea>
-                                </div>
+
                             </div>
 
                             <!-- File Upload Section -->
@@ -1428,9 +1684,77 @@
         </div>
     @endif
 
+    {{-- Edit Document Modal --}}
+        @if ($showEditModal)
+        <div class="modal show" style="display: block; background: rgba(0,0,0,0.5);" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <form wire:submit.prevent="updateDocument">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Document</h5>
+                            <button type="button" wire:click="closeEditModal" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="edit_document_title">Document Title</label>
+                                        <textarea id="edit_document_title" wire:model.defer="editForm.title" rows="3" class="form-control" placeholder="Enter document title"></textarea>
+                                        @error('editForm.title') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit_issuance_number">Issuance Number</label>
+                                        <input type="text" id="edit_issuance_number" wire:model.defer="editForm.issuance_number" class="form-control" placeholder="e.g., MC-2023-001">
+                                        @error('editForm.issuance_number') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit_document_sub_type_id">Document Type</label>
+                                        <select id="edit_document_sub_type_id" wire:model.defer="editForm.document_sub_type_id" class="form-control">
+                                            <option value="">Select Document Type</option>
+                                            @foreach($documentSubTypes as $subType)
+                                                <option value="{{ $subType->id }}">{{ $subType->document_sub_type_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('editForm.document_sub_type_id') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit_document_date">Date of Issuance</label>
+                                        <input type="date" id="edit_document_date" wire:model.defer="editForm.document_date" class="form-control">
+                                        @error('editForm.document_date') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Current File</label>
+                                        <div>
+                                            <a href="{{ Storage::url($editForm['current_file_path']) }}" target="_blank" class="btn btn-info btn-sm">View Current File</a>
+                                            <p class="text-muted small mt-1">{{ basename($editForm['current_file_path']) }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit_file">Upload New Version (Optional)</label>
+                                                                                <input type="file" id="edit_file" wire:model="editForm.file" class="form-control-file">
+                                        @error('editForm.file') <span class="text-danger">{{ $message }}</span> @enderror
+                                        <div wire:loading wire:target="editForm.file" class="text-sm text-gray-500">Uploading...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" wire:click="closeEditModal" class="btn btn-secondary">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <!-- Delete Confirmation Modal -->
-    @if($showDeleteModal)
-        <div class="modal fade show" style="display: block; background: rgba(0,0,0,0.5);" tabindex="-1">
+        @if($showDeleteModal)
+        <div class="modal show" style="display: block; background: rgba(0,0,0,0.5);" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="border-radius: var(--border-radius); border: none; box-shadow: var(--shadow-premium);">
                     <div class="modal-header" style="background: #fee2e2; border-bottom: 1px solid #fecaca;">

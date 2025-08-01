@@ -9,12 +9,23 @@ use OwenIt\Auditing\Contracts\Auditable;
 
 class IssuancesDocument extends Model implements Auditable
 {
+    public function parentDocument()
+    {
+        return $this->belongsTo(IssuancesDocument::class, 'version_of_id');
+    }
+
+    public function versions()
+    {
+        return $this->hasMany(IssuancesDocument::class, 'version_of_id');
+    }
+
     use HasFactory, SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
     protected $table = 'issuance_documents';
 
     protected $fillable = [
+        'version_of_id',
         'status_type_id',
         'document_reference_code',
         'document_type_id',
