@@ -119,12 +119,12 @@ class ListIssuances extends Component
 
     public function updatingDocumentTypeFilter()
     {
-        $this->resetPage();
+        $this->resetLoadedItems();
     }
 
     public function updatingPerPage()
     {
-        $this->resetPage();
+        $this->resetLoadedItems();
     }
 
     public function sortBy($field)
@@ -135,7 +135,7 @@ class ListIssuances extends Component
             $this->sortDirection = 'asc';
         }
         $this->sortField = $field;
-        $this->resetPage();
+        $this->resetLoadedItems();
     }
 
     public function clearFilters()
@@ -148,13 +148,13 @@ class ListIssuances extends Component
             'dateFrom',
             'dateTo'
         ]);
-        $this->resetPage();
+        $this->resetLoadedItems();
         $this->dispatchBrowserEvent('filters-cleared');
     }
 
     public function searchDocuments()
     {
-        $this->resetPage();
+        $this->resetLoadedItems();
         $this->loading = true;
         $this->dispatchBrowserEvent('search-initiated');
     }
@@ -298,7 +298,7 @@ class ListIssuances extends Component
                 'type' => 'success'
             ]);
 
-            $this->resetPage();
+            $this->resetLoadedItems();
 
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('document-update-failed', [
@@ -386,7 +386,7 @@ class ListIssuances extends Component
             ]);
 
             // Refresh the documents list
-            $this->resetPage();
+            $this->resetLoadedItems();
 
         } catch (\Exception $e) {
             // Dispatch error event for toastr notification

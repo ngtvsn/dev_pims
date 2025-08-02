@@ -14,6 +14,16 @@
 - **Visual Improvements**: Styled load more button and indicators to match existing green theme
 - **Performance Optimized**: Progressive loading maintains fast response times while browsing large datasets
 - **Bug Fix**: Removed pagination-related properties ($page, $perPage) from queryString array to prevent PropertyNotFoundException
+- **Bug Fix**: Replaced all `resetPage()` method calls with `resetLoadedItems()` to fix "Method does not exist" error after removing WithPagination trait
+
+### Bug Fixes
+- **Fixed Missing File Display on Issuance Cards** (2024-12-19)
+  - Added conditional checks in `list-issuances.blade.php` to handle documents without file attachments
+  - Document titles now display properly whether files are attached or not
+  - Added "No file attached" indicator for documents without files
+  - Fixed version links to only show when file_path exists
+  - Fixed edit modal to handle missing current file paths gracefully
+  - Prevents broken links and improves user experience for documents without attachments
 
 ### Fixed PDF File Access Issue
 - **Storage Link Configuration**: Fixed symbolic link between public/storage and storage/app/public

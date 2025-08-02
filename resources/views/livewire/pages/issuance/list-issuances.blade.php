@@ -1600,9 +1600,14 @@
                                         </div>
                                     </div>
                                     <div class="document-card-body compact">
-                                        <a href="{{ Storage::url($document->file_path) }}" target="_blank" class="document-title-link">
+                                        @if($document->file_path)
+                                            <a href="{{ Storage::url($document->file_path) }}" target="_blank" class="document-title-link">
+                                                <h6 class="document-title">{{ $document->document_title ?: 'Untitled Document' }}</h6>
+                                            </a>
+                                        @else
                                             <h6 class="document-title">{{ $document->document_title ?: 'Untitled Document' }}</h6>
-                                        </a>
+                                            <p class="text-muted small"><i class="fas fa-info-circle"></i> No file attached</p>
+                                        @endif
                                         
                                         <div class="document-meta">
                                             <div class="meta-item">
@@ -1623,7 +1628,11 @@
                                                 <ul class="versions-list">
                                                     @foreach($document->versions as $version)
                                                         <li>
-                                                            <a href="{{ Storage::url($version->file_path) }}" target="_blank">{{ $version->document_title }} ({{ $version->formatted_date }})</a>
+                                                            @if($version->file_path)
+                                                                <a href="{{ Storage::url($version->file_path) }}" target="_blank">{{ $version->document_title }} ({{ $version->formatted_date }})</a>
+                                                            @else
+                                                                <span class="text-muted">{{ $version->document_title }} ({{ $version->formatted_date }}) - No file</span>
+                                                            @endif
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -1868,8 +1877,12 @@
                                     <div class="form-group">
                                         <label>Current File</label>
                                         <div>
-                                            <a href="{{ Storage::url($editForm['current_file_path']) }}" target="_blank" class="btn btn-info btn-sm">View Current File</a>
-                                            <p class="text-muted small mt-1">{{ basename($editForm['current_file_path']) }}</p>
+                                            @if($editForm['current_file_path'])
+                                                <a href="{{ Storage::url($editForm['current_file_path']) }}" target="_blank" class="btn btn-info btn-sm">View Current File</a>
+                                                <p class="text-muted small mt-1">{{ basename($editForm['current_file_path']) }}</p>
+                                            @else
+                                                <p class="text-muted small"><i class="fas fa-info-circle"></i> No file currently attached</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
