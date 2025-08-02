@@ -2,11 +2,12 @@
     <!-- Custom Styles -->
     <style>
         :root {
-            --primary-blue: #1e40af;
+            --primary-green: #348547;
+            --secondary-green: #537b60;
+            --light-green: #f0f7f2;
             --emerald-accent: #10b981;
             --amber-accent: #f59e0b;
             --modern-gray: #6b7280;
-            --light-gray: #f8fafc;
             --border-radius: 12px;
             --shadow-elegant: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-premium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -14,7 +15,7 @@
         }
 
         .issuance-container {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background: linear-gradient(135deg, var(--light-green) 0%, #e8f5ea 100%);
             min-height: 100vh;
             padding: 2rem 0;
         }
@@ -41,11 +42,11 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--emerald-accent));
+            background: linear-gradient(90deg, var(--primary-green), var(--emerald-accent));
         }
 
         .card-header-modern {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
             color: white;
             padding: 1.5rem;
             border: none;
@@ -73,7 +74,7 @@
             border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            border-left: 4px solid var(--primary-blue);
+            border-left: 4px solid var(--primary-green);
             transition: var(--transition-smooth);
         }
 
@@ -85,7 +86,7 @@
 
         .filter-section-title {
             font-weight: 600;
-            color: var(--primary-blue);
+            color: var(--primary-green);
             margin-bottom: 1rem;
             font-size: 0.9rem;
             text-transform: uppercase;
@@ -116,8 +117,8 @@
         }
 
         .form-control-modern:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(52, 133, 71, 0.1);
             outline: none;
             transform: translateY(-1px);
         }
@@ -140,7 +141,7 @@
         }
 
         .btn-primary-modern {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
             color: white;
         }
 
@@ -203,73 +204,86 @@
         }
 
         .badge-modern {
-            padding: 0.375rem 0.75rem;
+            padding: 0.125rem 0.5rem;
             border-radius: 6px;
             font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
+            font-weight: 500;
+            text-transform: capitalize;
             letter-spacing: 0.025em;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid transparent;
         }
 
-        .badge-primary { background: #dbeafe; color: #1e40af; }
+        /* Document Type Specific Badge Colors */
+        .badge-modern.pitahc-order {
+            background: #dbeafe;
+            color: var(--primary-green);
+            border: 1px solid #bfdbfe;
+        }
+
+        .badge-modern.pitahc-advisory {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .badge-modern.pitahc-memorandum {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .badge-modern.general {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .badge-primary { background: var(--light-green); color: var(--primary-green); }
         .badge-success { background: #d1fae5; color: #065f46; }
         .badge-warning { background: #fef3c7; color: #92400e; }
         .badge-secondary { background: #f3f4f6; color: #374151; }
 
         .action-btn {
-            padding: 0.5rem;
+            padding: 0.375rem;
             border-radius: 6px;
-            border: none;
+            border: 1px solid #e5e7eb;
             cursor: pointer;
-            transition: var(--transition-smooth);
-            margin: 0 0.25rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s ease, height 0.3s ease;
-        }
-
-        .action-btn:hover::before {
-            width: 100px;
-            height: 100px;
+            transition: all 0.2s ease;
+            margin: 0 0.125rem;
+            background: white;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
         }
 
         .action-btn-edit {
-            background: #dbeafe;
-            color: #1e40af;
-            border: 1px solid #bfdbfe;
+            color: var(--secondary-green);
         }
 
         .action-btn-delete {
-            background: #fee2e2;
-            color: #dc2626;
-            border: 1px solid #fecaca;
+            color: #ef4444;
         }
 
         .action-btn:hover {
-            transform: scale(1.05) translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border-color: #d1d5db;
+            background: #f9fafb;
         }
 
         .action-btn-edit:hover {
-            background: #bfdbfe;
-            border-color: #93c5fd;
+            color: #1d4ed8;
+            border-color: #bfdbfe;
+            background: #eff6ff;
         }
 
         .action-btn-delete:hover {
-            background: #fecaca;
-            border-color: #fca5a5;
+            color: #dc2626;
+            border-color: #fecaca;
+            background: #fef2f2;
         }
 
         /* Enhanced Search Input Styles */
@@ -340,7 +354,7 @@
             width: 2rem;
             height: 2rem;
             border: 3px solid #e5e7eb;
-            border-top: 3px solid var(--primary-blue);
+            border-top: 3px solid var(--primary-green);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -372,38 +386,69 @@
 
         .document-cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-            padding: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            padding: 1rem 0;
         }
 
         @media (max-width: 1200px) {
             .document-cards-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 0.75rem;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
         }
 
         @media (max-width: 768px) {
             .document-cards-container {
                 grid-template-columns: 1fr;
-                gap: 0.5rem;
+                gap: 0.75rem;
             }
         }
 
         .document-card {
             background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-elegant);
-            border: 1px solid #e2e8f0;
-            transition: var(--transition-smooth);
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
             overflow: hidden;
             position: relative;
         }
 
         .document-card:hover {
-            box-shadow: var(--shadow-premium);
+            border-color: var(--primary-green);
+            box-shadow: 0 8px 25px -5px rgba(52, 133, 71, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transform: translateY(-2px);
+        }
+
+        /* Document Type Color Coding */
+        .document-card[data-type="PITAHC ORDER"]::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-green), #1d5c2d);
+        }
+
+        .document-card[data-type="PITAHC ADVISORY"]::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #10b981, #059669);
+        }
+
+        .document-card[data-type="PITAHC MEMORANDUM"]::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #f59e0b, #d97706);
         }
 
         .document-card.compact {
@@ -425,24 +470,28 @@
 
         .document-number {
             font-weight: 600;
-            color: var(--primary-blue);
+            color: #6b7280;
             font-size: 0.75rem;
-            background: white;
+            background: #f9fafb;
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e5e7eb;
             word-wrap: break-word;
             overflow-wrap: break-word;
-            max-width: 150px;
+            max-width: 180px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            letter-spacing: 0.025em;
+            text-transform: uppercase;
         }
 
         .document-card.compact .document-number {
-            font-size: 0.7rem;
-            padding: 0.125rem 0.375rem;
-            max-width: 120px;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.375rem 0.625rem;
+            max-width: 200px;
+            letter-spacing: 0.3px;
         }
 
         .document-number:hover {
@@ -457,28 +506,74 @@
             gap: 0.5rem;
         }
 
+        .action-btn {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 0.875rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .action-btn-edit {
+            background: linear-gradient(135deg, var(--primary-green), #1d5c2d);
+            color: white;
+        }
+
+        .action-btn-edit:hover {
+            background: linear-gradient(135deg, #1d5c2d, #15803d);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(52, 133, 71, 0.3);
+        }
+
+        .action-btn-delete {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .action-btn-delete:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+        }
+
         .document-card-body {
-            padding: 1rem;
+            padding: 1.25rem;
         }
 
         .document-card-body.compact {
-            padding: 0.75rem;
+            padding: 1rem;
         }
 
         .document-title {
-            font-weight: 600;
-            color: #1f2937;
+            font-weight: 500;
+            color: #111827;
             margin-bottom: 0.5rem;
-            line-height: 1.3;
-            font-size: 0.875rem;
+            line-height: 1.4;
+            font-size: 0.95rem;
             word-wrap: break-word;
             overflow-wrap: break-word;
-            hyphens: auto;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+        }
+
+        .document-card:hover .document-title {
+            color: var(--primary-green);
+            transform: translateX(2px);
         }
 
         .document-title-link {
@@ -489,7 +584,7 @@
 
         .document-title-link:hover {
             text-decoration: none;
-            color: inherit;
+            color: var(--primary-green);
         }
 
         .document-card.compact .document-title {
@@ -498,36 +593,15 @@
             -webkit-line-clamp: 1;
         }
 
-        .document-card-body:hover {
-            background: #f8fafc;
-            padding: 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            z-index: 10;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transform: translateY(-2px);
-        }
 
-        .document-card-body.compact:hover {
-            padding: 0.875rem;
-        }
-
-        .document-card-body:hover .document-title {
-            -webkit-line-clamp: unset;
-            overflow: visible;
-            margin-bottom: 0.75rem;
-        }
-
-        .document-card-body:hover .document-meta {
-            margin-top: 0.5rem;
-        }
 
         .document-meta {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
         }
+
+
 
         .meta-item {
             display: flex;
@@ -546,7 +620,12 @@
         }
 
         .meta-item:hover {
-            background: #f8fafc;
+            background: rgba(52, 133, 71, 0.05);
+            transform: translateX(2px);
+        }
+
+        .document-card:hover .meta-item {
+            transition: all 0.2s ease;
         }
 
         .meta-label {
@@ -563,11 +642,15 @@
         }
 
         .meta-value {
-            color: #374151;
+            color: #6b7280;
             font-size: 0.75rem;
             word-wrap: break-word;
             overflow-wrap: break-word;
             line-height: 1.3;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
         }
 
         .document-card.compact .meta-value {
@@ -713,6 +796,52 @@
 
         .upload-modal.closing .upload-modal-content {
             animation: modalSlideOut 0.25s ease-in forwards;
+        }
+
+        /* Infinite Scroll Styles */
+        .load-more-container {
+            border-top: 1px solid rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .load-more-btn {
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            background: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(52, 133, 71, 0.1);
+        }
+
+        .load-more-btn:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(52, 133, 71, 0.2);
+        }
+
+        .load-more-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .end-of-results {
+            font-style: italic;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .loading-indicator {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            margin: 1rem;
+        }
+
+        .spinner-border.text-success {
+            color: var(--primary-green) !important;
         }
 
         .upload-modal-header {
@@ -1196,27 +1325,27 @@
         }
 
         .btn-info-modern {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            background: linear-gradient(135deg, var(--primary-green) 0%, #1d5c2d 100%);
             color: white;
             border: none;
             transition: all 0.2s ease;
         }
 
         .btn-info-modern:hover {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 4px 12px rgba(52, 133, 71, 0.4);
         }
 
         .btn-outline-primary-modern {
             background: transparent;
-            border: 2px solid #3b82f6;
-            color: #3b82f6;
+            border: 2px solid var(--primary-green);
+                color: var(--primary-green);
             transition: all 0.2s ease;
         }
 
         .btn-outline-primary-modern:hover {
-            background: #3b82f6;
+            background: var(--primary-green);
             color: white;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
@@ -1294,7 +1423,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark" style="font-weight: 700; color: var(--primary-blue) !important;">
+                    <h1 class="m-0 text-dark" style="font-weight: 700; color: var(--primary-green) !important;">
                         <i class="fas fa-bullhorn mr-2"></i>Document Issuances
                     </h1>
                 </div>
@@ -1443,23 +1572,18 @@
                             </div>
                         </div>
 
-                        <!-- Pagination Controls -->
-                        <div class="d-flex justify-content-between align-items-center p-3 bg-light">
-                            <div class="form-group-modern mb-0">
-                                <label class="form-label-modern mb-1">Per Page</label>
-                                <select wire:model="perPage" class="form-control-modern" style="width: auto; display: inline-block;">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
+                        <!-- Loading indicator for infinite scroll -->
+                        <div class="loading-indicator" wire:loading.delay wire:target="loadMore" style="display: none; text-align: center; padding: 1rem;">
+                            <div class="spinner-border text-success" role="status">
+                                <span class="sr-only">Loading...</span>
                             </div>
+                            <p class="mt-2 text-muted">Loading more documents...</p>
                         </div>
 
                         <!-- Document Cards Grid -->
                         <div class="document-cards-container">
                             @forelse($documents as $document)
-                                <div class="document-card compact">
+                                <div class="document-card" data-type="{{ $document->documentSubType->document_sub_type_name ?? 'General' }}">
                                     <div class="document-card-header">
                                         <div class="document-number">
                                             {{ $document->document_reference_code ?: 'DOC-' . str_pad($document->id, 4, '0', STR_PAD_LEFT) }}
@@ -1482,13 +1606,13 @@
                                         
                                         <div class="document-meta">
                                             <div class="meta-item">
-                                                <span class="meta-label">Type:</span>
-                                                <span class="badge-modern badge-primary">
+                                                <span class="meta-label"><i class="fas fa-tag"></i> Type:</span>
+                                                <span class="badge-modern {{ strtolower(str_replace(' ', '-', $document->documentSubType->document_sub_type_name ?? 'general')) }}">
                                                     {{ $document->documentSubType->document_sub_type_name ?? 'General' }}
                                                 </span>
                                             </div>
                                             <div class="meta-item">
-                                                <span class="meta-label">Document Date:</span>
+                                                <span class="meta-label"><i class="fas fa-calendar-alt"></i> Date:</span>
                                                 <span class="meta-value">{{ $document->formatted_date }}</span>
                                             </div>
                                         </div>
@@ -1516,10 +1640,25 @@
                             @endforelse
                         </div>
 
-                        <!-- Pagination -->
-                        @if($documents->hasPages())
-                            <div class="pagination-modern">
-                                {{ $documents->links() }}
+                        <!-- Infinite Scroll Load More -->
+                        @if($hasMoreItems)
+                            <div class="load-more-container" style="text-align: center; padding: 2rem;">
+                                <button wire:click="loadMore" class="btn btn-outline-success btn-lg load-more-btn" 
+                                        wire:loading.attr="disabled" wire:target="loadMore">
+                                    <span wire:loading.remove wire:target="loadMore">
+                                        <i class="fas fa-chevron-down"></i> Load More Documents
+                                    </span>
+                                    <span wire:loading wire:target="loadMore">
+                                        <i class="fas fa-spinner fa-spin"></i> Loading...
+                                    </span>
+                                </button>
+                            </div>
+                        @endif
+                        
+                        <!-- End of results indicator -->
+                        @if(!$hasMoreItems && count($documents) > 0)
+                            <div class="end-of-results" style="text-align: center; padding: 2rem; color: #6c757d;">
+                                <i class="fas fa-check-circle"></i> All documents loaded
                             </div>
                         @endif
                     </div>
@@ -1848,8 +1987,48 @@
                     e.preventDefault();
                     closeUploadModalWithAnimation();
                 }
+            });
+
+            // Infinite scroll functionality
+            let isLoading = false;
+            
+            function checkScroll() {
+                if (isLoading) return;
                 
-                // Close modal when clicking backdrop
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                
+                // Trigger load more when user is 200px from bottom
+                if (scrollTop + windowHeight >= documentHeight - 200) {
+                    const loadMoreBtn = document.querySelector('.load-more-btn');
+                    if (loadMoreBtn && !loadMoreBtn.disabled) {
+                        isLoading = true;
+                        loadMoreBtn.click();
+                        
+                        // Reset loading flag after a delay
+                        setTimeout(() => {
+                            isLoading = false;
+                        }, 1000);
+                    }
+                }
+            }
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', checkScroll);
+            
+            // Reset loading flag when Livewire finishes loading
+            document.addEventListener('livewire:load', function() {
+                isLoading = false;
+            });
+            
+            // Reset loading flag after Livewire updates
+            Livewire.hook('message.processed', (message, component) => {
+                isLoading = false;
+            });
+            
+            // Close modal when clicking backdrop
+            document.addEventListener('click', function(e) {
                 if (e.target.classList.contains('upload-modal')) {
                     closeUploadModalWithAnimation();
                 }

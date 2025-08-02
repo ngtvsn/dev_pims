@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Pages\Issuance;
 
 use Livewire\Component;
-use Livewire\WithPagination;
+// Removed WithPagination for infinite scroll implementation
 use Livewire\WithFileUploads;
 use App\Models\IssuancesDocument;
 use App\Models\IssuancesDocumentType;
@@ -15,7 +15,7 @@ use Carbon\Carbon;
 
 class ListIssuances extends Component
 {
-    use WithPagination, WithFileUploads;
+    use WithFileUploads;
 
     // Filter properties
     public $search = '';
@@ -24,7 +24,8 @@ class ListIssuances extends Component
     public $issuanceNumber = '';
     public $dateFrom = '';
     public $dateTo = '';
-    public $perPage = 10;
+    public $perPage = 12;
+    public $loadedItems = 12;
     public $sortField = 'created_at';
     public $sortDirection = 'desc';
 
@@ -65,15 +66,49 @@ class ListIssuances extends Component
         'issuanceNumber' => ['except' => ''],
         'dateFrom' => ['except' => ''],
         'dateTo' => ['except' => ''],
-        'perPage' => ['except' => 10],
-        'page' => ['except' => 1],
     ];
 
     protected $listeners = [
         'documentDeleted' => 'refreshDocuments',
-        'documentUpdated' => 'refreshDocuments',
+        'documentUploaded' => 'refreshDocuments',
         'openUploadModal' => 'openUploadModal',
     ];
+
+    // Reset loaded items when filters change
+    public function updatedSearch()
+    {
+        $this->resetLoadedItems();
+    }
+
+    public function updatedDocumentTypeFilter()
+    {
+        $this->resetLoadedItems();
+    }
+
+    public function updatedSubjectSearch()
+    {
+        $this->resetLoadedItems();
+    }
+
+    public function updatedIssuanceNumber()
+    {
+        $this->resetLoadedItems();
+    }
+
+    public function updatedDateFrom()
+    {
+        $this->resetLoadedItems();
+    }
+
+    public function updatedDateTo()
+    {
+        $this->resetLoadedItems();
+    }
+
+    private function resetLoadedItems()
+    {
+        $this->loadedItems = 12;
+    }
 
     public function mount()
     {
@@ -362,6 +397,11 @@ class ListIssuances extends Component
         }
     }
 
+    public function loadMore()
+    {
+        $this->loadedItems += 12;
+    }
+
     public function getDocumentsProperty()
     {
         $query = IssuancesDocument::query()
@@ -400,7 +440,44 @@ class ListIssuances extends Component
         // Apply sorting
         $query->orderBy($this->sortField, $this->sortDirection);
 
-        return $query->paginate($this->perPage);
+        return $query->take($this->loadedItems)->get();
+    }
+
+    public function getTotalDocumentsProperty()
+    {
+        $query = IssuancesDocument::query()
+            ->issuances()
+            ->active();
+
+        // Apply same filters for count
+        if ($this->search) {
+            $query->where(function($q) {
+                $q->where('document_title', 'like', '%' . $this->search . '%')
+                  ->orWhere('document_reference_code', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        if ($this->subjectSearch) {
+            $query->where('document_title', 'like', '%' . $this->subjectSearch . '%');
+        }
+
+        if ($this->documentTypeFilter) {
+            $query->where('document_sub_type_id', $this->documentTypeFilter);
+        }
+
+        if ($this->issuanceNumber) {
+            $query->where('document_reference_code', 'like', '%' . $this->issuanceNumber . '%');
+        }
+
+        if ($this->dateFrom) {
+            $query->whereDate('created_at', '>=', $this->dateFrom);
+        }
+
+        if ($this->dateTo) {
+            $query->whereDate('created_at', '<=', $this->dateTo);
+        }
+
+        return $query->count();
     }
 
     public function getDocumentSubTypesProperty()
@@ -418,7 +495,8 @@ class ListIssuances extends Component
         return view('livewire.pages.issuance.list-issuances', [
             'documents' => $this->documents,
             'documentSubTypes' => $this->documentSubTypes,
-            'totalDocuments' => $this->documents->total(),
+            'totalDocuments' => $this->totalDocuments,
+            'hasMoreItems' => $this->loadedItems < $this->totalDocuments,
         ]);
     }
 }

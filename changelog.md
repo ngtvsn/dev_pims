@@ -2,6 +2,19 @@
 
 ## [Latest] - 2025-01-08
 
+### Implemented Infinite Scroll with 12 Cards Per Load
+- **Removed Pagination**: Eliminated traditional pagination controls and "Per Page" dropdown
+- **Infinite Scroll System**: Implemented automatic loading when user scrolls within 200px of bottom
+- **12 Cards Per Load**: Each load operation fetches exactly 12 documents for optimal performance
+- **Load More Button**: Added manual "Load More Documents" button with loading states and animations
+- **Smart Filter Integration**: When filters are applied, the list resets to show first 12 items
+- **End Detection**: Shows "All documents loaded" indicator when no more items are available
+- **Backend Optimization**: Removed WithPagination trait and implemented loadMore() method with loadedItems tracking
+- **Frontend Enhancement**: Added automatic scroll detection JavaScript with loading prevention logic
+- **Visual Improvements**: Styled load more button and indicators to match existing green theme
+- **Performance Optimized**: Progressive loading maintains fast response times while browsing large datasets
+- **Bug Fix**: Removed pagination-related properties ($page, $perPage) from queryString array to prevent PropertyNotFoundException
+
 ### Fixed PDF File Access Issue
 - **Storage Link Configuration**: Fixed symbolic link between public/storage and storage/app/public
 - **APP_URL Correction**: Updated APP_URL in .env from http://127.0.0.1:8000 to http://localhost:8001
