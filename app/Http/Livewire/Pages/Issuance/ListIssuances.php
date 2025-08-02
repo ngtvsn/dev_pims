@@ -44,8 +44,10 @@ class ListIssuances extends Component
         'issuance_number' => '',
         'document_sub_type_id' => '',
         'document_date' => '',
-        'file' => null,
+        'files' => [],
     ];
+    public $uploadedFiles = [];
+    public $selectedFileIndex = 0;
     public $editForm = [
         'id' => null,
         'title' => '',
@@ -315,31 +317,63 @@ class ListIssuances extends Component
             'issuance_number' => '',
             'document_sub_type_id' => '',
             'document_date' => '',
-            'file' => null,
+            'files' => [],
         ];
+        $this->uploadedFiles = [];
+        $this->selectedFileIndex = 0;
         $this->showPreview = false;
     }
 
-    public function removeFile()
+    public function updatedUploadFormFiles()
     {
-        $this->uploadForm['file'] = null;
-        $this->showPreview = false;
+        $this->uploadedFiles = [];
+        if (!empty($this->uploadForm['files'])) {
+            foreach ($this->uploadForm['files'] as $index => $file) {
+                $this->uploadedFiles[] = [
+                    'index' => $index,
+                    'name' => $file->getClientOriginalName(),
+                    'size' => $this->formatFileSize($file->getSize()),
+                    'type' => $file->getClientMimeType(),
+                ];
+            }
+            
+            // Auto-show preview if the first file is a PDF
+            $firstFile = $this->uploadForm['files'][0] ?? null;
+            if ($firstFile && strtolower(pathinfo($firstFile->getClientOriginalName(), PATHINFO_EXTENSION)) === 'pdf') {
+                $this->showPreview = true;
+            }
+        }
     }
-    
+
+    public function removeFile($index)
+    {
+        if (isset($this->uploadForm['files'][$index])) {
+            unset($this->uploadForm['files'][$index]);
+            $this->uploadForm['files'] = array_values($this->uploadForm['files']); // Re-index array
+            
+            // Reset selectedFileIndex if the selected file was removed or if it's out of bounds
+            if ($this->selectedFileIndex >= count($this->uploadForm['files'])) {
+                $this->selectedFileIndex = max(0, count($this->uploadForm['files']) - 1);
+            }
+            
+            $this->updatedUploadFormFiles(); // Update the display list
+        }
+    }
+
+    private function formatFileSize($bytes)
+    {
+        if ($bytes >= 1048576) {
+            return number_format($bytes / 1048576, 2) . ' MB';
+        } elseif ($bytes >= 1024) {
+            return number_format($bytes / 1024, 2) . ' KB';
+        } else {
+            return $bytes . ' bytes';
+        }
+    }
+
     public function togglePreview()
     {
         $this->showPreview = !$this->showPreview;
-    }
-    
-    public function updatedUploadFormFile()
-    {
-        // Automatically show preview for PDF files when uploaded
-        if ($this->uploadForm['file'] && 
-            strtolower(pathinfo($this->uploadForm['file']->getClientOriginalName(), PATHINFO_EXTENSION)) === 'pdf') {
-            $this->showPreview = true;
-        } else {
-            $this->showPreview = false;
-        }
     }
 
     public function uploadDocument()
@@ -349,19 +383,21 @@ class ListIssuances extends Component
             'uploadForm.issuance_number' => 'required|string|max:100',
             'uploadForm.document_sub_type_id' => 'required|exists:issuance_document_sub_types,id',
             'uploadForm.document_date' => 'required|date',
-            'uploadForm.file' => 'required|file|mimes:pdf,doc,docx|max:10240', // 10MB max
+            'uploadForm.files' => 'required|array|min:1',
+            'uploadForm.files.*' => 'required|file|mimes:pdf,doc,docx|max:15360', // 15MB max per file
         ]);
 
         try {
-            // Store the uploaded file
-            $filePath = $this->uploadForm['file']->store('issuance-documents', 'public');
-            $originalName = $this->uploadForm['file']->getClientOriginalName();
-
             // Get the document type from the selected sub type
             $subType = \App\Models\IssuancesDocumentSubType::find($this->uploadForm['document_sub_type_id']);
             
-            // Create the document record
-            IssuancesDocument::create([
+            // Use the first file as the primary document
+            $primaryFile = $this->uploadForm['files'][0];
+            $filePath = $primaryFile->store('issuance-documents', 'public');
+            $originalName = $primaryFile->getClientOriginalName();
+
+            // Create a single document record
+            $document = IssuancesDocument::create([
                 'document_title' => $this->uploadForm['title'],
                 'document_reference_code' => $this->uploadForm['issuance_number'],
                 'document_type_id' => $subType->document_type_id,
@@ -375,13 +411,41 @@ class ListIssuances extends Component
                 'updated_by' => auth()->id(),
             ]);
 
+            // If there are additional files, store them as attachments or versions
+            if (count($this->uploadForm['files']) > 1) {
+                for ($i = 1; $i < count($this->uploadForm['files']); $i++) {
+                    $additionalFile = $this->uploadForm['files'][$i];
+                    $additionalFilePath = $additionalFile->store('issuance-documents', 'public');
+                    $additionalOriginalName = $additionalFile->getClientOriginalName();
+
+                    // Create additional document records linked to the main document
+                    IssuancesDocument::create([
+                        'document_title' => $this->uploadForm['title'] . ' - Attachment ' . $i,
+                        'document_reference_code' => $this->uploadForm['issuance_number'],
+                        'document_type_id' => $subType->document_type_id,
+                        'document_sub_type_id' => $this->uploadForm['document_sub_type_id'],
+                        'document_date' => $this->uploadForm['document_date'],
+                        'file_path' => $additionalFilePath,
+                        'original_filename' => $additionalOriginalName,
+                        'status_type_id' => 2, // Published status
+                        'office_id' => auth()->user()->office_id ?? 1,
+                        'created_by' => auth()->id(),
+                        'updated_by' => auth()->id(),
+                        'parent_document_id' => $document->id, // Link to main document if this field exists
+                    ]);
+                }
+            }
+
             // Reset form and close modal
             $this->resetUploadForm();
             $this->closeUploadModal();
 
             // Dispatch success event for toastr notification
+            $fileCount = count($this->uploadForm['files']);
+            $message = $fileCount === 1 ? 'Document uploaded successfully!' : "Document with {$fileCount} files uploaded successfully!";
+            
             $this->dispatchBrowserEvent('document-uploaded', [
-                'message' => 'Document uploaded successfully!',
+                'message' => $message,
                 'type' => 'success'
             ]);
 

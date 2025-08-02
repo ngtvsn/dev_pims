@@ -2,6 +2,28 @@
 
 ## [Latest] - 2025-01-08
 
+### Enhanced Upload Modal with Modern UI Design
+- **Complete UI Redesign**: Redesigned the upload modal with a cleaner, more modern interface
+- **Improved File Tabs**: Enhanced tab navigation with better styling, hover effects, and active state indicators
+- **Unified Preview Container**: Created a cohesive preview container that adapts to single or multiple files
+- **Better Visual Hierarchy**: Removed overlapping elements and improved spacing for better readability
+- **Consistent Styling**: Unified color scheme and typography throughout the preview section
+- **Enhanced Placeholders**: Improved placeholder states for upload, preview hidden, and non-PDF files
+- **Responsive Design**: Better mobile and tablet compatibility with improved layout structure
+- **Reduced Visual Clutter**: Eliminated complex gradients and overlapping borders that caused visual conflicts
+- **Technical Improvements**: Streamlined CSS classes, removed redundant styles, and improved maintainability
+
+### Previous PDF Preview and Tab Navigation Fixes
+- **PDF Preview Display**: Corrected the PDF preview logic to properly access file objects for `temporaryUrl()` method
+- **File Tab Navigation**: Implemented tab functionality to switch between multiple uploaded files for preview
+- **Auto Preview**: Added automatic preview display when PDF files are uploaded
+- **Backend Support**: Added `selectedFileIndex` property to track the currently viewed file in the preview
+- **User Interface**: Enhanced file tab management with proper styling and active state indicators
+- **File Management**: Improved `removeFile` method to handle `selectedFileIndex` reset when files are removed
+- **Technical Details**: Fixed file object access in blade template for proper `temporaryUrl()` generation, updated `updatedUploadFormFiles` method to auto-show preview for PDF files, and enhanced `resetUploadForm` and `removeFile` methods to manage file selection state
+
+## [2025-01-08]
+
 ### Implemented Infinite Scroll with 12 Cards Per Load
 - **Removed Pagination**: Eliminated traditional pagination controls and "Per Page" dropdown
 - **Infinite Scroll System**: Implemented automatic loading when user scrolls within 200px of bottom
@@ -15,6 +37,14 @@
 - **Performance Optimized**: Progressive loading maintains fast response times while browsing large datasets
 - **Bug Fix**: Removed pagination-related properties ($page, $perPage) from queryString array to prevent PropertyNotFoundException
 - **Bug Fix**: Replaced all `resetPage()` method calls with `resetLoadedItems()` to fix "Method does not exist" error after removing WithPagination trait
+
+### Added
+- **Enhanced Modal Animations** (2024-12-19)
+  - Added smooth fade-in/fade-out and slide animations for edit and delete modals
+  - Implemented consistent animation timing (250ms) across all modal interactions
+  - Enhanced keyboard shortcuts (Escape key) to handle all modal types with animations
+  - Added backdrop click handling for animated modal closing
+  - Improved visual consistency and user experience with professional transitions
 
 ### Bug Fixes
 - **Fixed Missing File Display on Issuance Cards** (2024-12-19)
@@ -43,6 +73,20 @@
 ## [Unreleased]
 
 ### Added
+- Upgraded upload modal to support multiple file uploads with single issuance creation
+  - Increased file size limit from 10MB to 15MB per file
+  - Added support for uploading multiple files simultaneously as one issuance
+  - Enhanced file management with individual file removal capability
+  - Updated upload form structure from single `file` to `files` array
+  - Added `uploadedFiles` property for managing selected files
+  - Implemented file validation for each uploaded file (15MB limit, PDF/DOC/DOCX types)
+  - Fixed PDF preview functionality to work with multiple file uploads
+  - Added file tab navigation for switching between multiple selected files
+  - Implemented `selectedFileIndex` property to track currently viewed file
+  - Modified upload logic to create one primary document with additional files as attachments
+  - Added helper methods: `updatedUploadFormFiles`, `removeFile`, `formatFileSize`
+  - Enhanced error handling and success messaging for single issuance uploads
+  - Improved file tab management with automatic index adjustment when files are removed
 - Implemented document versioning. When a document is edited, a new version is created, and the original is archived. The version history is now displayed on the document card.
 - The document title is now a hyperlink to the PDF file.
 - Enhanced search input fields with icons and clear buttons for better user experience
