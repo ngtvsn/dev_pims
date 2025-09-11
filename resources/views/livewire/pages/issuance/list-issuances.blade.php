@@ -11,7 +11,7 @@
             --border-radius: 12px;
             --shadow-elegant: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-premium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .issuance-container {
@@ -132,12 +132,14 @@
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.875rem;
-            transition: var(--transition-smooth);
+            transition: all 0.05s ease;
             border: none;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-primary-modern {
@@ -158,6 +160,12 @@
 
         .btn-secondary-modern:hover {
             background: #e5e7eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-modern:active {
+            transform: translateY(0) scale(0.98);
+            transition: all 0.05s ease;
         }
 
         .data-table {
@@ -460,9 +468,9 @@
         }
 
         .document-card-header {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             padding: 1rem 1.25rem;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #059669;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -470,12 +478,12 @@
 
         .document-number {
             font-weight: 600;
-            color: #6b7280;
+            color: #059669;
             font-size: 0.75rem;
-            background: #f9fafb;
+            background: rgba(255, 255, 255, 0.9);
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid rgba(255, 255, 255, 0.7);
             word-wrap: break-word;
             overflow-wrap: break-word;
             max-width: 180px;
@@ -495,8 +503,8 @@
         }
 
         .document-number:hover {
-            background: #f0f9ff;
-            border-color: var(--primary-blue);
+            background: rgba(255, 255, 255, 1);
+            border-color: #10b981;
             transform: scale(1.02);
             transition: all 0.2s ease;
         }
@@ -524,6 +532,11 @@
         .action-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .action-btn:active {
+            transform: translateY(0) scale(0.95);
+            transition: all 0.05s ease;
         }
 
         .action-btn-edit {
@@ -733,7 +746,7 @@
             justify-content: center;
             z-index: 1050;
             opacity: 0;
-            animation: modalFadeIn 0.3s ease-out forwards;
+            animation: modalFadeIn 0.25s ease-out forwards;
         }
 
         .upload-modal-content {
@@ -745,7 +758,7 @@
             max-height: 95vh;
             overflow-y: auto;
             transform: scale(0.9) translateY(-20px);
-            animation: modalSlideIn 0.3s ease-out forwards;
+            animation: modalSlideIn 0.25s ease-out forwards;
         }
 
         /* Modal Animation Keyframes */
@@ -874,8 +887,10 @@
             padding: 12px 30px;
             border-radius: 25px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.05s ease;
             box-shadow: 0 2px 10px rgba(52, 133, 71, 0.1);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .load-more-btn:hover {
@@ -883,6 +898,11 @@
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 4px 20px rgba(52, 133, 71, 0.2);
+        }
+
+        .load-more-btn:active {
+            transform: translateY(0) scale(0.98);
+            transition: all 0.05s ease;
         }
 
         .load-more-btn:disabled {
@@ -1090,7 +1110,9 @@
             gap: 0.5rem;
             padding: 0.75rem 1.5rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.05s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .preview-button-container .btn-secondary-modern {
@@ -1431,12 +1453,19 @@
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            transition: all 0.2s ease;
+            transition: all 0.05s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-outline-modern:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline-modern:active {
+            transform: scale(0.98);
+            transition: all 0.05s ease;
         }
 
         .btn-sm {
@@ -1448,7 +1477,9 @@
             background: linear-gradient(135deg, var(--primary-green) 0%, #1d5c2d 100%);
             color: white;
             border: none;
-            transition: all 0.2s ease;
+            transition: all 0.05s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-info-modern:hover {
@@ -1457,11 +1488,18 @@
             box-shadow: 0 4px 12px rgba(52, 133, 71, 0.4);
         }
 
+        .btn-info-modern:active {
+            transform: translateY(0) scale(0.98);
+            transition: all 0.05s ease;
+        }
+
         .btn-outline-primary-modern {
             background: transparent;
             border: 2px solid var(--primary-green);
-                color: var(--primary-green);
-            transition: all 0.2s ease;
+            color: var(--primary-green);
+            transition: all 0.05s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-outline-primary-modern:hover {
@@ -1469,6 +1507,11 @@
             color: white;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-outline-primary-modern:active {
+            transform: translateY(0) scale(0.98);
+            transition: all 0.05s ease;
         }
 
         /* Responsive Design */
@@ -1721,7 +1764,7 @@
                                     </div>
                                     <div class="document-card-body compact">
                                         @if($document->file_path)
-                                            <a href="{{ Storage::url($document->file_path) }}" target="_blank" class="document-title-link">
+                                            <a href="{{ asset('storage/' . $document->file_path) }}" target="_blank" class="document-title-link">
                                                 <h6 class="document-title">{{ $document->document_title ?: 'Untitled Document' }}</h6>
                                             </a>
                                         @else
@@ -1749,7 +1792,7 @@
                                                     @foreach($document->versions as $version)
                                                         <li>
                                                             @if($version->file_path)
-                                                                <a href="{{ Storage::url($version->file_path) }}" target="_blank">{{ $version->document_title }} ({{ $version->formatted_date }})</a>
+                                                                <a href="{{ asset('storage/' . $version->file_path) }}" target="_blank">{{ $version->document_title }} ({{ $version->formatted_date }})</a>
                                                             @else
                                                                 <span class="text-muted">{{ $version->document_title }} ({{ $version->formatted_date }}) - No file</span>
                                                             @endif
@@ -2033,7 +2076,7 @@
                                         <label>Current File</label>
                                         <div>
                                             @if($editForm['current_file_path'])
-                                                <a href="{{ Storage::url($editForm['current_file_path']) }}" target="_blank" class="btn btn-info btn-sm">View Current File</a>
+                                                <a href="{{ asset('storage/' . $editForm['current_file_path']) }}" target="_blank" class="btn btn-info btn-sm">View Current File</a>
                                                 <p class="text-muted small mt-1">{{ basename($editForm['current_file_path']) }}</p>
                                             @else
                                                 <p class="text-muted small"><i class="fas fa-info-circle"></i> No file currently attached</p>

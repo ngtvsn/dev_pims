@@ -53,9 +53,10 @@
         }
 
         .search-card-header {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             padding: 2rem;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #059669;
+            color: white;
         }
 
         .search-card-body {
@@ -324,8 +325,8 @@
                 <div class="col-lg-10 col-xl-8">
                     <div class="search-card">
                         <div class="search-card-header">
-                            <h2 class="text-center mb-0" style="color: #1f2937; font-weight: 600;">
-                                <i class="fas fa-filter mr-2" style="color: var(--primary-blue);"></i>
+                            <h2 class="text-center mb-0" style="color: white; font-weight: 600;">
+                                <i class="fas fa-filter mr-2" style="color: white;"></i>
                                 Advanced Document Search
                             </h2>
                         </div>

@@ -1,6 +1,120 @@
 # Changelog
 
-## [Latest] - 2025-01-08
+## [2025-09-04]
+
+### Application Startup and Configuration
+- **Dependencies Installation**: Successfully installed npm dependencies using `--legacy-peer-deps` flag to resolve compatibility conflicts
+  - Fixed Bootstrap version conflicts between `bootstrap@4.6.0` and `bootstrap-switch@3.3.4`
+  - Resolved Tailwind CSS peer dependency conflicts between `tailwindcss@2.2.7` and `tailwindcss-plugins@0.3.0`
+  - Addressed deprecated package warnings for various npm packages (stable, urix, source-map-url, etc.)
+- **Asset Compilation**: Fixed webpack.mix.js configuration for successful asset compilation
+  - Removed missing `laravel-mix-artisan-serve` dependency from `webpack.mix.js`
+  - Fixed Laravel Mix configuration to compile SASS and JavaScript assets
+  - Addressed Bootstrap SCSS deprecation warnings for `bg-gradient-variant` mixin (deprecated in Bootstrap v4.5.0)
+- **Application Launch**: Successfully started the Laravel application
+  - Application accessible at `http://192.168.1.32/dev_pims` (configured in `pims.env`)
+  - Composer dependencies already installed (vendor directory present)
+  - Laravel framework running with PHP 8.4 compatibility warnings (deprecated parameter nullability)
+- **Database Setup and Migration**: Resolved database connectivity issues and completed migrations
+  - **Issue**: PHP missing MySQL PDO driver ("could not find driver" error)
+  - **Root Cause**: No php.ini configuration file was present for PHP 8.4.12
+  - **Solution**: Created comprehensive `php.ini` file with required extensions:
+    - Enabled `mysqli` and `pdo_mysql` for database connectivity
+    - Enabled `mbstring`, `openssl`, `fileinfo` for Laravel core functionality
+    - Enabled `gd`, `intl`, `exif`, `xsl` for additional features
+    - Configured memory limit (256M), upload limits (100M), and timezone (Asia/Manila)
+  - **Migration Success**: Successfully ran `php artisan migrate` creating 46+ database tables
+    - Created core Laravel tables (users, migrations, failed_jobs, password_resets)
+    - Created application-specific tables for document management system
+    - Created audit trails, notifications, and versioning tables
+    - Completed all migrations from 2014 to 2025 without errors
+- **Environment Configuration**: Verified application configuration
+  - Database: `dev_pims_db` on localhost MySQL (port 3306)
+  - Application environment: local development mode with debug enabled
+  - Mail configuration: Gmail SMTP setup for notifications
+- **Application Status**: Login page displays correctly with PITAHC branding and authentication form
+- **Technical Notes**:
+  - Multiple Bootstrap deprecation warnings during asset compilation (non-blocking)
+  - PHP 8.4 compatibility warnings present but application functional
+  - Assets successfully compiled and cached for production use
+  - Database fully configured and ready for application use
+
+## [Latest] - 2025-01-27
+
+### Pre-Deployment Backup Creation
+- Created backup copy of entire project: `dev_pims_backup_20250807_113730`
+- Preserved current state before pulling updates from origin
+- Backup includes all files, configurations, and database backups
+- Safe deployment preparation completed
+
+### Modal Animation Speed Optimization
+- Reduced all modal animation durations from 1.25s to 0.25s for faster interactions
+- Updated CSS keyframe animations for upload, edit, and delete modals
+- Synchronized JavaScript setTimeout functions to 250ms
+- Consistent fast timing across all modal types for better user experience
+- Improved responsiveness while maintaining smooth visual transitions
+
+### Button Responsiveness Optimization
+- Reduced button transition durations from 0.3s to 0.05s for instant feedback
+- Added active states with scale effects (0.98 scale) for all button types
+- Implemented user-select: none and tap-highlight prevention for mobile
+- Optimized hover and click interactions across all modal buttons
+- Enhanced overall UI responsiveness and tactile feedback
+
+### Modal Animation Duration Enhancement
+- **Enhanced Modal Animation Timing** (2024-12-19)
+  - Updated modal closing animation duration from 250ms to 1.25s (1250ms) for smoother user experience
+  - Modified CSS animations: `.upload-modal.closing`, `.edit-modal.closing`, `.delete-modal.closing`
+  - Updated JavaScript setTimeout functions to match new animation duration
+  - Consistent timing across all modal types (upload, edit, delete)
+  - Improved visual feedback and professional appearance
+
+### Modal Functionality Fix
+- **Livewire Asset URL Fix**: Fixed modal functionality issues when changing APP_URL
+  - Updated `config/livewire.php` to use `env('APP_URL')` instead of hardcoded asset URL
+  - Resolved AJAX request failures and asset loading issues in Livewire components
+  - Fixed modal interactions, form submissions, and dynamic content loading
+  - Cleared configuration and application cache to apply changes
+- **Root Cause**: Hardcoded asset_url in Livewire config caused URL mismatch when APP_URL changed
+- **Solution**: Dynamic asset URL configuration ensures Livewire adapts to any APP_URL changes
+
+### URL Configuration Reversion
+- **APP_URL Revert**: Changed APP_URL back to `http://localhost:8000` due to network accessibility issues
+- **Configuration Cache**: Cleared configuration and application cache to apply changes
+- **Local Development**: Application now configured for local development access only
+
+### PDF File Access Fix & Green Header Styling
+- **PDF URL Generation**: Resolved "Not Found" errors when opening PDF files
+  - Cleared configuration cache (`php artisan config:clear`)
+  - Cleared application cache (`php artisan cache:clear`)
+  - Cleared compiled views cache (`php artisan view:clear`)
+  - Cleared route cache (`php artisan route:clear`)
+- **Modal URL Fix**: Fixed modal iframe URLs that were still using old localhost addresses
+  - Updated APP_URL in `.env` file to include correct port number (`:8000`)
+  - Fixed `temporaryUrl()` method to generate correct URLs for PDF previews in modals
+  - Cleared configuration and application cache to apply changes
+- **Storage URL Configuration**: Ensured `Storage::url()` and `temporaryUrl()` methods use updated APP_URL
+- **File Access**: PDF preview and download links now correctly point to the new network address
+- **Consistent Green Header Styling**: Applied uniform green color scheme to card headers across the application
+  - Updated document card headers in `list-issuances.blade.php` with green gradient (`#10b981` to `#059669`)
+  - Updated search card header in `search-documents.blade.php` with matching green gradient
+  - Modified document number styling to complement green headers with white background and green text
+  - Updated hover effects to maintain green theme consistency
+  - Ensured text readability with white text on green backgrounds
+- **Technical Details**: The `config/filesystems.php` already uses `env('APP_URL').'/storage'` for public disk URL generation. Cache clearing ensures Laravel picks up the updated APP_URL for all file URL generation. Both `Storage::url()` and `temporaryUrl()` methods now generate correct URLs with the network address. Design enhancement includes consistent green branding across all card headers for improved visual cohesion.
+- **PHP CLI Extension Check**: Double-check `php.ini` to ensure `extension=zip` and `extension=curl` are enabled; run `php --ini` to verify the active configuration and restart your terminal or server before running `composer install`.
+
+## [2025-01-08]
+
+### Application URL Configuration
+- **Network Access Setup**: Updated APP_URL from `http://localhost:8000` to `http://192.168.1.201/dev_pims` for network accessibility
+- **Environment Configuration**: Modified `.env` file to support deployment on network IP address
+- **Multi-device Access**: Application now accessible from other devices on the same network
+- **Hardcoded URL Fixes**: Updated all hardcoded localhost URLs in configuration files:
+  - Fixed `pims.env` APP_URL from `http://localhost/dev_pims` to `http://192.168.1.201/dev_pims`
+  - Updated fallback URL in `config/app.php` from `http://127.0.0.1:8000` to `http://192.168.1.201/dev_pims`
+  - Updated Livewire asset URL in `config/livewire.php` from `http://127.0.0.1:8000` to `http://192.168.1.201/dev_pims`
+- **Configuration Cache**: Cleared Laravel configuration cache to ensure all URL changes take effect immediately
 
 ### Enhanced Upload Modal with Modern UI Design
 - **Complete UI Redesign**: Redesigned the upload modal with a cleaner, more modern interface
